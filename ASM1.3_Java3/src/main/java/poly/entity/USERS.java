@@ -70,8 +70,8 @@ public class USERS {
 		return Mobile;
 	}
 
-	public void setMobile(String moble) {
-		Mobile = moble;
+	public void setMobile(String mobile) {
+		Mobile = mobile;
 	}
 
 	public String getEmail() {
