@@ -317,6 +317,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		            <label for="home">Home:</label>
 		            <div style="flex: 1;">
 		                <input class="form-check-input" type="radio" name="home" id="true" value=""}>
+		                <input class="form-check-input" type="radio" name="home" id="true" value=""}>
 		            </div>
 		        </div>
 		
