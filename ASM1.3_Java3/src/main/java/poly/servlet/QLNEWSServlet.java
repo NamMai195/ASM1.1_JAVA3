@@ -60,9 +60,11 @@ public class QLNEWSServlet extends HttpServlet{
             req.setAttribute("error", "An error occurred during the operation.");
         }
 
-        req.setAttribute("item", form);
+        req.setAttribute("user", form);
         List<NEWS> list = dao.selectAll();
         req.setAttribute("list", list);
         req.getRequestDispatcher(VIEW_QLTT).forward(req, resp);
     }
+   
+
 }

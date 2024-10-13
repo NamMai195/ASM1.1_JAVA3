@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trang Chủ</title>
-    <link rel="stylesheet" href="cssindex.css" />
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/cssindex.css" />
   </head>
   <style>
   .content {
@@ -231,7 +231,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   <body>
     <div class="container">
       <header>
-        <img src="./img/image.png" alt="Bị lỗi" />
+         <img src="${pageContext.request.contextPath}/Views/img/image.png" alt="Bị lỗi" />
         <div class="text-overlay">
           <h1>Chân Trời Công Nghệ FPT</h1>
           <h3>Tin Tức Dẫn Đầu Giới Công Nghệ</h3>
@@ -356,6 +356,19 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		        </tr>
 		    </thead>
 		    <tbody>
+		     <c:forEach var="user" items="${list}">
+		            <tr onclick="selectUser('${user.id}', '${user.title}', '${user.content}', '${user.image}', '${user.postedDate}', '${user.author}', '${user.viewCount}', '${user.categoryId}','${user.home}')">
+		                <td>${user.id}</td>
+		                <td>${user.title}</td>       
+		                <td>${user.content}</td>
+		                <td>${user.image}</td>
+		                <td>${user.postedDate}</td>
+		                <td>${user.author}</td>
+		                <td>${user.viewCount}</td>
+		                <td>${user.categoryId}</td>
+		                <td>${user.home}</td>
+		            </tr>
+		        </c:forEach>
 		    </tbody>
 		</table>
         </div>
