@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trang Chủ</title>
-    <link rel="stylesheet" href="cssindex.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/cssindex.css" />
   </head>
   <style>
   .content {
@@ -232,7 +232,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   <body>
     <div class="container">
       <header>
-        <img src="./img/image.png" alt="Bị lỗi" />
+        <img src="${pageContext.request.contextPath}/Views/img/image.png" alt="Bị lỗi" />
         <div class="text-overlay">
           <h1>Chân Trời Công Nghệ FPT</h1>
           <h3>Tin Tức Dẫn Đầu Giới Công Nghệ</h3>
@@ -277,13 +277,13 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		        <div class="user-form-group">
 		            <label for="userId">ID:</label> 
 		            <input type="text" name="userId" class="user-form-control"
-		                   value="${user != null ? user.userId : ''}" ${user != null ? 'readonly' : ''}>
+		                   value="${user != null ? user.id : ''}" ${user != null ? 'readonly' : ''}>
 		        </div>
 		
 		        <div class="user-form-group">
 		            <label for="name">FullName:</label> 
 		            <input type="text" name="name" class="user-form-control"
-		                   value="${user != null ? user.name : ''}" required>
+		                   value="${user != null ? user.fullname : ''}" required>
 		        </div>
 		        
 		        <div class="user-form-group">
@@ -373,8 +373,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		        <c:forEach var="user" items="${list}">
 		            <tr onclick="selectUser('${user.id}', '${user.password}', '${user.fullname}', '${user.birthday}', '${user.gender}', '${user.mobile}', '${user.email}', '${user.role}')">
 		                <td>${user.id}</td>
-		                <td>${user.password}</td>
-		                <td>${user.fullname}</td>
+		                <td>${user.fullname}</td>       
 		                <td>${user.birthday}</td>
 		                <td>${user.gender}</td>
 		                <td>${user.mobile}</td>
