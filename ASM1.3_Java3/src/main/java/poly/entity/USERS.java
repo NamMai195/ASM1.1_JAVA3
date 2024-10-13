@@ -8,20 +8,20 @@ public class USERS {
 	private String Fullname;
 	private Date Birthday;
 	private Boolean Gender;
-	private String Moble;
+	private String Mobile;
 	private String Email;
 	private Boolean Role;
 	
 	public USERS() {
 	}
 
-	public USERS(String id, String password, String fullname, Date birthday, Boolean gender, String moble, String email,Boolean role) {
+	public USERS(String id, String password, String fullname, Date birthday, Boolean gender, String mobile, String email,Boolean role) {
 		Id = id;
 		Password = password;
 		Fullname = fullname;
 		Birthday = birthday;
 		Gender = gender;
-		Moble = moble;
+		Mobile = mobile;
 		Email = email;
 		Role = role;
 	}
@@ -66,12 +66,12 @@ public class USERS {
 		Gender = gender;
 	}
 
-	public String getMoble() {
-		return Moble;
+	public String getMobile() {
+		return Mobile;
 	}
 
-	public void setMoble(String moble) {
-		Moble = moble;
+	public void setMobile(String moble) {
+		Mobile = moble;
 	}
 
 	public String getEmail() {

@@ -370,7 +370,19 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		        </tr>
 		    </thead>
 		    <tbody>
-		    </tbody>
+		        <c:forEach var="user" items="${list}">
+		            <tr onclick="selectUser('${user.id}', '${user.password}', '${user.fullname}', '${user.birthday}', '${user.gender}', '${user.mobile}', '${user.email}', '${user.role}')">
+		                <td>${user.id}</td>
+		                <td>${user.password}</td>
+		                <td>${user.fullname}</td>
+		                <td>${user.birthday}</td>
+		                <td>${user.gender}</td>
+		                <td>${user.mobile}</td>
+		                <td>${user.email}</td>
+		                <td>${user.role}</td>
+		            </tr>
+		        </c:forEach>
+    		</tbody>
 		</table>
         </div>
         <!-- Sidebar -->

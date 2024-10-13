@@ -7,9 +7,9 @@ import java.util.List;
 import poly.entity.USERS;
 import poly.utils.JdbcHelper;
 
-public class USERSDao extends WebDao<USERS, Integer>{
-	final String INSERT_SQL = "INSERT INTO USERS(Id, Password, Fullname, Birthday, Gender, Moble, Email, Role) VALUES(?,?,?,?,?,?,?,?)";
-	final String UPDATE_SQL = "UPDATE USERS SET Password=?, Fullname=?, Birthday=?, Gender=?, Moble=?, Email=?, Role=? WHERE Id=?";
+public class USERSDao extends WebDao<USERS, String>{
+	final String INSERT_SQL = "INSERT INTO USERS(Id, Password, Fullname, Birthday, Gender, Mobile, Email, Role) VALUES(?,?,?,?,?,?,?,?)";
+	final String UPDATE_SQL = "UPDATE USERS SET Password=?, Fullname=?, Birthday=?, Gender=?, Mobile=?, Email=?, Role=? WHERE Id=?";
 	final String DELETE_SQL = "DELETE FROM USERS WHERE Id=?";
 	final String SELECT_ALL_SQL = "SELECT * FROM USERS";
 	final String SELECT_BY_ID_SQL = "SELECT * FROM USERS WHERE Id=?";
@@ -18,16 +18,16 @@ public class USERSDao extends WebDao<USERS, Integer>{
 
     @Override
     public void insert(USERS entity) {
-        JdbcHelper.update(INSERT_SQL,entity.getId(),entity.getPassword(),entity.getFullname(),entity.getBirthday(),entity.getGender(),entity.getMoble(),entity.getEmail(),entity.getRole());
+        JdbcHelper.update(INSERT_SQL,entity.getId(),entity.getPassword(),entity.getFullname(),entity.getBirthday(),entity.getGender(),entity.getMobile(),entity.getEmail(),entity.getRole());
     }
 
     @Override
     public void update(USERS entity) {
-        JdbcHelper.update(UPDATE_SQL,entity.getPassword(),entity.getFullname(),entity.getBirthday(),entity.getGender(),entity.getMoble(),entity.getEmail(),entity.getRole(),entity.getId());
+        JdbcHelper.update(UPDATE_SQL,entity.getPassword(),entity.getFullname(),entity.getBirthday(),entity.getGender(),entity.getMobile(),entity.getEmail(),entity.getRole(),entity.getId());
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         JdbcHelper.update(DELETE_SQL,id);
     }
 
@@ -37,7 +37,7 @@ public class USERSDao extends WebDao<USERS, Integer>{
     }
 
     @Override
-    public USERS selectByid(Integer id) {
+    public USERS selectByid(String id) {
     List<USERS> list= selectBySql(SELECT_BY_ID_SQL,id);
         if(list.isEmpty()){
             return null;
@@ -56,7 +56,7 @@ public class USERSDao extends WebDao<USERS, Integer>{
                 entity.setFullname(rs.getString("Fullname"));
                 entity.setBirthday(rs.getDate("Birthday"));
                 entity.setGender(rs.getBoolean("Gender"));
-                entity.setMoble(rs.getString("Moble"));
+                entity.setMobile(rs.getString("Mobile"));
                 entity.setEmail(rs.getString("Email"));
                 entity.setRole(rs.getBoolean("Role"));
 
