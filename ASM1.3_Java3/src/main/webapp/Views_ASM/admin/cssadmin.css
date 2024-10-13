@@ -1,0 +1,279 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+header {
+  position: relative;
+  text-align: center;
+  color: aquamarine;
+}
+
+header img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* Canh giữa văn bản */
+.text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: aquamarine;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.text-overlay h1 {
+  font-size: 40px;
+  margin: 0;
+}
+
+.text-overlay h3 {
+  margin: 0;
+}
+
+/* Style cho thanh điều hướng */
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #333;
+  padding: 10px 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-family: "Courier New", Courier, monospace;
+  transition: background-color 0.3s;
+  position: relative;
+}
+
+nav a:hover {
+  background-color: #555;
+}
+
+/* Dropdown cho Thể loại */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  width: 150px;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+  background-color: #555;
+}
+
+/* Hiển thị menu khi hover vào Thể loại */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Canh giữa theo chiều dọc */
+  background-color: #333;
+  padding: 10px 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-family: "Courier New", Courier, monospace;
+  transition: background-color 0.3s;
+  display: inline-block;
+  height: 100%; /* Đảm bảo cùng chiều cao */
+}
+
+nav a:hover {
+  background-color: #555;
+}
+/* Style cho thanh điều hướng thứ hai */
+.nav-secondary {
+  display: flex; /* Thay đổi để căn chỉnh nằm ngang */
+  justify-content: center; /* Canh giữa các mục */
+  background-color: #1e90ff; /* Màu nền cho thanh điều hướng thứ hai */
+  padding: 10px 0; /* Thêm padding cho thanh */
+}
+
+.nav-secondary a {
+  color: white;
+  padding: 10px 20px; /* Thêm padding cho các liên kết */
+  text-decoration: none; /* Bỏ gạch chân */
+}
+
+.nav-secondary a:hover {
+  background-color: #1c86ee; /* Hiệu ứng hover */
+}
+/* Style cho thanh điều hướng thứ hai */
+.nav-secondary {
+  display: flex; /* Thay đổi để căn chỉnh nằm ngang */
+  justify-content: center; /* Canh giữa các mục */
+  background-color: #1e90ff; /* Màu nền cho thanh điều hướng thứ hai */
+  padding: 10px 0; /* Thêm padding cho thanh */
+}
+
+.nav-secondary a {
+  color: white;
+  padding: 10px 20px; /* Thêm padding cho các liên kết */
+  text-decoration: none; /* Bỏ gạch chân */
+}
+
+/* Thanh điều hướng chính */
+.nav-primary {
+  display: flex; /* Hiển thị thành hàng ngang */
+  justify-content: center; /* Canh giữa các mục */
+  background-color: #333; /* Màu nền cho thanh điều hướng chính */
+  padding: 10px 0; /* Thêm padding cho thanh điều hướng */
+}
+
+.nav-primary a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px; /* Thêm padding cho mỗi liên kết */
+}
+
+.nav-primary a:hover {
+  background-color: #555; /* Hiệu ứng hover cho thanh điều hướng chính */
+}
+/* main */
+.main {
+  display: flex;
+  margin: 0 auto;
+}
+.content {
+  /* Để trống cho nội dung khác */
+  padding: 20px;
+  flex: 3;
+}
+/* Style cho phần sidebar bên phải */
+.sidebar-right {
+  position: relative; /* Đặt position relative */
+  top: 0px; /* Khoảng cách từ menu đến sidebar */
+  right: 0; /* Đặt ở bên phải */
+  background-color: #f0f0f0; /* Màu nền cho sidebar */
+  padding: 20px; /* Thêm padding cho sidebar */
+  width: 250px; /* Chiều rộng của sidebar */
+  border-radius: 5px; /* Bo góc cho sidebar */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng cho sidebar */
+  /* float: right; Đặt sidebar nằm bên phải */
+  flex: 1;
+}
+
+.sidebar-right h3 {
+  margin: 10px 0; /* Khoảng cách giữa các tiêu đề */
+}
+
+.sidebar-right ul {
+  list-style-type: none; /* Bỏ dấu đầu dòng cho danh sách */
+  padding: 0; /* Bỏ padding cho danh sách */
+}
+
+.sidebar-right ul li {
+  margin: 5px 0; /* Khoảng cách giữa các mục danh sách */
+}
+
+.sidebar-right input[type="email"] {
+  width: calc(100% - 22px); /* Chiều rộng cho ô nhập */
+  padding: 10px; /* Thêm padding cho ô nhập */
+  margin-top: 10px; /* Khoảng cách từ tiêu đề đến ô nhập */
+}
+
+.sidebar-right button {
+  padding: 10px; /* Thêm padding cho nút */
+  margin-top: 10px; /* Khoảng cách từ ô nhập đến nút */
+  background-color: #1e90ff; /* Màu nền cho nút */
+  color: white; /* Màu chữ cho nút */
+  border: none; /* Bỏ viền cho nút */
+  cursor: pointer; /* Hiệu ứng con trỏ khi di chuột vào nút */
+}
+
+.sidebar-right button:hover {
+  background-color: #1c86ee; /* Hiệu ứng hover cho nút */
+}
+/* Hàng chữ chạy */
+.scrolling-text {
+  background-color: #1e90ff; /* Màu nền cho hàng chữ */
+  color: white; /* Màu chữ */
+  font-size: 20px; /* Kích thước chữ */
+  padding: 10px; /* Khoảng cách bên trong */
+  text-align: center; /* Căn giữa chữ */
+}
+/* Style cho phần nội dung chính */
+
+/* Style cho các bài báo */
+.news-article {
+  background-color: #f9f9f9; /* Màu nền cho bài báo */
+  border: 1px solid #ddd; /* Viền cho bài báo */
+  border-radius: 5px; /* Bo góc cho bài báo */
+  padding: 15px; /* Khoảng cách bên trong */
+  margin: 10px 0; /* Khoảng cách giữa các bài báo */
+  display: flex; /* Sử dụng flexbox */
+  float: left;
+  height: 200px;
+  /* width: 70%; */
+}
+
+/* Hình ảnh trong bài báo */
+.news-article img {
+  width: 200px; /* Chiều rộng hình ảnh */
+  height: auto; /* Chiều cao tự động */
+  margin-right: 15px; /* Khoảng cách bên phải hình ảnh */
+  border-radius: 5px; /* Bo góc cho hình ảnh */
+  float: left;
+}
+
+/* Tiêu đề bài báo */
+.news-article h3 {
+  margin: auto 0; /* Bỏ margin cho tiêu đề */
+  font-size: 18px; /* Kích thước chữ */
+}
+.news-article p {
+  margin: auto 0;
+}
+/* Nút yêu thích và xem chi tiết */
+.favorite-button,
+.detail-button {
+  background-color: #1e90ff; /* Màu nền cho nút */
+  color: white; /* Màu chữ cho nút */
+  border: none; /* Bỏ viền cho nút */
+  padding: 8px 12px; /* Padding cho nút */
+  cursor: pointer; /* Hiệu ứng con trỏ khi di chuột vào nút */
+  margin-right: 5px; /* Khoảng cách giữa các nút */
+  border-radius: 5px; /* Bo góc cho nút */
+}
+
+.favorite-button:hover,
+.detail-button:hover {
+  background-color: #1c86ee; /* Hiệu ứng hover cho nút */
+}
+/* chân trang */
+/* footer {
+  width: 100%;
+  margin: 0 auto;
+  height: 100px;
+  background-color: #333;
+}
+footer div {
+  margin: 0 auto;
+} */

@@ -1,0 +1,8 @@
+.conten img {
+  width: 400px;
+  float: left;
+}
+.conten .tg {
+  float: right;
+  font-style: italic;
+}
