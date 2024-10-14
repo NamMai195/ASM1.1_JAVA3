@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/cssindex.css" />
   </head>
   <style>
-  .content {
+ .content {
 	flex: 1;
 	background-color: white;
 	padding: 20px;
@@ -228,7 +228,33 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 	cursor: pointer;
 	font-size: 16px; /* Kích thước của biểu tượng con mắt */
 }
+.search-container {
+    width: 100%; /* Đặt chiều rộng 100% */
+    display: flex; /* Để căn chỉnh nội dung */
+    justify-content: center; /* Căn giữa nội dung */
+    margin-bottom: 20px; /* Khoảng cách dưới thanh tìm kiếm */
+}
+
 </style>
+<script>
+        // Tự động chuyển đến servlet khi trang được tải
+        window.onload = function() {
+            fetch("${pageContext.request.contextPath}/USERS/QLNguoiDung")
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(html => {
+                    document.body.innerHTML = html; // Thay đổi nội dung trang với phản hồi từ servlet
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        };
+    </script>
+    
   <body>
     <div class="container">
       <header>
@@ -275,38 +301,38 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		        <input type="hidden" name="action" value="${user != null ? 'update' : 'add'}">
 		        
 		        <div class="user-form-group">
-		            <label for="userId">ID:</label> 
-		            <input type="text" name="userId" class="user-form-control"
+		            <label for="id">ID:</label> 
+		            <input type="text" name="id" class="user-form-control"
 		                   value="${user != null ? user.id : ''}" ${user != null ? 'readonly' : ''}>
 		        </div>
 		
 		        <div class="user-form-group">
-		            <label for="name">FullName:</label> 
-		            <input type="text" name="name" class="user-form-control"
+		            <label for="fullname">FullName:</label> 
+		            <input type="text" name="fullname" class="user-form-control"
 		                   value="${user != null ? user.fullname : ''}" required>
 		        </div>
 		        
 		        <div class="user-form-group">
 		            <label for="birthday">Birthday:</label> 
-		            <input type="text" name="Birthday" class="user-form-control"
+		            <input type="text" name="birthday" class="user-form-control"
 		                   value="${user != null ? user.birthday : ''}" required>
 		        </div>
 		        
 				<div class="user-form-group">
-		            <label for="role">Gender:</label>
+		            <label for="gender">Gender:</label>
 		            <div style="flex: 1;">
-		                <input class="form-check-input" type="radio" name="role" id="Male" value="Male"
-		                       ${user != null && user.gender == 'Male' ? 'checked' : ''}>
-		                <label class="form-check-label" for="Male">Male</label> 
-		                <input class="form-check-input" type="radio" name="role" id="Female" value="Female"
-		                       ${user != null && user.gender == 'Female' ? 'checked' : ''}>
-		                <label class="form-check-label" for="Female">Female</label>
+		                <input class="form-check-input" type="radio" name="gender" id="male" value="true"
+					       ${user != null && user.gender ? 'checked' : ''}>
+					<label class="form-check-label" for="male">Male</label> 
+					<input class="form-check-input" type="radio" name="gender" id="female" value="false"
+					       ${user != null && user.gender == false ? 'checked' : ''}>
+					<label class="form-check-label" for="female">Female</label>
 		            </div>
 		        </div>
 		        
 		        <div class="user-form-group">
 		            <label for="mobile">Mobile:</label> 
-		            <input type="text" name="Mobile" class="user-form-control"
+		            <input type="text" name="mobile" class="user-form-control"
 		                   value="${user != null ? user.mobile : ''}" required>
 		        </div>
 		        
@@ -327,34 +353,33 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		
 		        <div class="user-form-group">
 		            <label for="role">Role:</label>
-		            <div style="flex: 1;">
-		                <input class="form-check-input" type="radio" name="role" id="manage" value="Manage"
-		                       ${user != null && user.role == 'Manage' ? 'checked' : ''}>
-		                <label class="form-check-label" for="manage">Manage</label> 
-		                <input class="form-check-input" type="radio" name="role" id="reporter" value="Reporter"
-		                       ${user != null && user.role == 'Reporter' ? 'checked' : ''}>
-		                <label class="form-check-label" for="reporter">Reporter</label>
-		            </div>
+					<div style="flex: 1;">
+					    <input class="form-check-input" type="radio" name="role" id="manage" value="Manage"
+					           ${user != null && user.role == true ? 'checked' : ''}>
+					    <label class="form-check-label" for="manage">Manage</label> 
+					    <input class="form-check-input" type="radio" name="role" id="reporter" value="Reporter"
+					           ${user != null && user.role == false ? 'checked' : ''}>
+					    <label class="form-check-label" for="reporter">Reporter</label>
+					</div>
 		        </div>
 		
 		        <div class="text-center">
-		            <button type="submit" class="user-form-button">Thêm</button>
-		            <button type="submit" class="user-form-button">Xóa</button>
-		            <button type="submit" class="user-form-button">Cập Nhập</button>
+		            <button type="submit" name="action" value="add" class="user-form-button">Thêm</button>
+					<button type="submit" name="action" value="delete" class="user-form-button">Xóa</button>
+					<button type="submit" name="action" value="update" class="user-form-button">Cập Nhật</button>
 		        </div>
 		    </form>
 		</div>
 <br><br><br>
+
 		<!-- Form tìm kiếm -->
-					<div class="text-center mb-3"
-						style="margin: 0 auto; margin-bottom: 15px;">
-						<form action="users" method="get" class="form-inline d-inline-block">
-							<input type="hidden" name="action" value="search"> <input
-								type="text" name="searchId" class="form-control"
-								placeholder="Nhập ID người dùng" required>
-							<button type="submit" class="btn btn-secondary ml-2">Tìm</button>
-						</form>
-					</div>
+			<div class="search-container">
+			    <form action="${pageContext.request.contextPath}/USERS/QLNguoiDung" method="get" class="form-inline d-inline-block" style="width: 80%;">
+			        <input type="hidden" name="action" value="search"> 
+			        <input type="text" name="searchId" class="form-control" placeholder="Nhập ID người dùng" required style="width: 100%;">
+			        <button type="submit" class="btn btn-secondary ml-2">Tìm</button>
+			    </form>
+			</div>
 
 		<!-- Danh sách người dùng -->
 		<table class="table table-bordered" style="text-align: center;">
@@ -371,14 +396,14 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		    </thead>
 		    <tbody>
 		        <c:forEach var="user" items="${list}">
-		            <tr onclick="selectUser('${user.id}', '${user.password}', '${user.fullname}', '${user.birthday}', '${user.gender}', '${user.mobile}', '${user.email}', '${user.role}')">
+		            <tr onclick="selectUser('${user.id}', '${user.fullname}', '${user.birthday}', '${user.gender}', '${user.mobile}', '${user.email}', '${user.password}', '${user.role}')">
 		                <td>${user.id}</td>
 		                <td>${user.fullname}</td>       
 		                <td>${user.birthday}</td>
-		                <td>${user.gender}</td>
+		                <td>${user.gender == true ? 'Nam' : 'Nữ'}</td>
 		                <td>${user.mobile}</td>
 		                <td>${user.email}</td>
-		                <td>${user.role}</td>
+		                <td>${user.role == true ? 'Quản Trị' : 'Phóng Viên'}</td>
 		            </tr>
 		        </c:forEach>
     		</tbody>
@@ -403,6 +428,28 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
       </footer>
     </div>
     <script>
+	    function selectUser(id, fullname, birthday, gender, mobile, email, password, role) {
+	        document.getElementsByName('id')[0].value = id;
+	        document.getElementsByName('fullname')[0].value = fullname;
+	        document.getElementsByName('birthday')[0].value = birthday;
+	        
+	        // Cập nhật giới tính
+	        const MaleRadio = document.getElementById('male');
+	        const FemaleRadio = document.getElementById('female');
+	        MaleRadio.checked = (gender === 'true');
+	        FemaleRadio.checked = (gender === 'false');
+	        
+	        document.getElementsByName('mobile')[0].value = mobile;
+	        document.getElementsByName('email')[0].value = email;
+	        document.getElementsByName('password')[0].value = password;
+	
+	        // Cập nhật vai trò
+	        const ManageRadio = document.getElementById('manage');
+	        const ReporterRadio = document.getElementById('reporter');
+	        ManageRadio.checked = (role === 'true');
+	        ReporterRadio.checked = (role === 'false');
+	    }
+
         function togglePassword() {
             const passwordField = document.getElementById('password');
             const toggleEye = document.querySelector('.toggle-password');

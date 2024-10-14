@@ -14,23 +14,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import poly.dao.USERSDao;
 import poly.entity.USERS;
-@WebServlet({ "/USERS/QLNguoiDung", 
-		    "/USERS/edit/*", 
-		    "/USERS/create", 
-		    "/USERS/update",
-		    "/USERS/delete", 
-		    "/USERS/reset"})
-
+@WebServlet({ "/USERS/QLNguoiDung",
+			"/USERS/edit/*", 
+			"/USERS/create", 
+			"/USERS/update", 
+			"/USERS/delete", 
+			"/USERS/reset"})
 public class USERSServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private static final String VIEW_QLND = "/Views/QLNguoiDung.jsp";
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	USERS form = new USERS();
-    	USERSDao dao = new USERSDao();
+        USERS form = new USERS();
+        USERSDao dao = new USERSDao();
 
-        // Populate the NEWS object with form data
+        // Populate the USERS object with form data
         try {
             BeanUtils.populate(form, req.getParameterMap());
         } catch (IllegalAccessException | InvocationTargetException e) {
@@ -45,7 +44,7 @@ public class USERSServlet extends HttpServlet {
                 if (id != null) {
                     form = dao.selectByid(id);
                 } else {
-                    req.setAttribute("error", "Invalid news ID.");
+                    req.setAttribute("error", "Invalid user ID.");
                 }
             } else if (path.contains("create")) {
                 dao.insert(form);
@@ -55,7 +54,11 @@ public class USERSServlet extends HttpServlet {
             } else if (path.contains("delete")) {
                 dao.delete(form.getId());
                 form = new USERS(); // Reset form
+            } else if (req.getParameter("action").equals("search")) {
+                String searchId = req.getParameter("searchId");
+                form = dao.selectByid(searchId); // Lấy người dùng theo ID
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("error", "An error occurred during the operation.");
