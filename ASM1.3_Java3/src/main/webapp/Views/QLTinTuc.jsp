@@ -3,14 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang Chủ</title>
-     <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/cssindex.css" />
-  </head>
-  <style>
-  .content {
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trang Chủ</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Views/cssindex.css" />
+</head>
+<style>
+.content {
 	flex: 1;
 	background-color: white;
 	padding: 20px;
@@ -173,6 +174,7 @@
 	text-align: center;
 	margin-bottom: 20px;
 }
+
 .text-center {
 	display: flex;
 	justify-content: center; /* Căn giữa */
@@ -228,167 +230,195 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 	font-size: 16px; /* Kích thước của biểu tượng con mắt */
 }
 </style>
-  <body>
-    <div class="container">
-      <header>
-         <img src="${pageContext.request.contextPath}/Views/img/image.png" alt="Bị lỗi" />
-        <div class="text-overlay">
-          <h1>Chân Trời Công Nghệ FPT</h1>
-          <h3>Tin Tức Dẫn Đầu Giới Công Nghệ</h3>
-        </div>
-      </header>
-      <!-- Thanh điều hướng -->
-      <nav>
-        <a href="#">Trang chủ</a>
-        <div class="dropdown">
-          <a href="#">Thể loại</a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Tất Cả</a></li>
-            <li><a href="#">Tin Mới</a></li>
-            <li><a href="#">Giải trí</a></li>
-            <li><a href="#">Công Nghệ Mới</a></li>
-            <li><a href="#">Sản Phẩm Công Nghệ Mới Ra Mắt</a></li>
-          </ul>
-        </div>
-        <a href="#">Yêu thích</a>
-        <a href="#">Đăng nhập</a>
-        <a href="#">Đăng ký</a>
-      </nav>
-      <!-- Hàng chữ chạy -->
-      <marquee behavior="scroll" direction="left" class="scrolling-text">
-        Nhà Cái Đến Từ Châu Âu
-      </marquee>
-      <!-- Nội dung chính -->
-      <div class="main">
-        <div class="content">
-          <h1 class="mt-5">QUẢN LÝ TIN TỨC</h1>
-			<!-- Thông báo (nếu có) -->
-			<c:if test="${not empty message}">
-				<div class="alert alert-info">${message}</div>
-			</c:if>
+<body>
+	<div class="container">
+		<header>
+			<img src="${pageContext.request.contextPath}/Views/img/image.png"
+				alt="Bị lỗi" />
+			<div class="text-overlay">
+				<h1>Chân Trời Công Nghệ FPT</h1>
+				<h3>Tin Tức Dẫn Đầu Giới Công Nghệ</h3>
+			</div>
+		</header>
+		<!-- Thanh điều hướng -->
+		<nav>
+			<a href="#">Trang chủ</a>
+			<div class="dropdown">
+				<a href="#">Thể loại</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Tất Cả</a></li>
+					<li><a href="#">Tin Mới</a></li>
+					<li><a href="#">Giải trí</a></li>
+					<li><a href="#">Công Nghệ Mới</a></li>
+					<li><a href="#">Sản Phẩm Công Nghệ Mới Ra Mắt</a></li>
+				</ul>
+			</div>
+			<a href="#">Yêu thích</a> <a href="#">Đăng nhập</a> <a href="#">Đăng
+				ký</a>
+		</nav>
+		<!-- Hàng chữ chạy -->
+		<marquee behavior="scroll" direction="left" class="scrolling-text">
+			Nhà Cái Đến Từ Châu Âu </marquee>
+		<!-- Nội dung chính -->
+		<div class="main">
+			<div class="content">
+				<h1 class="mt-5">QUẢN LÝ TIN TỨC</h1>
+				<!-- Thông báo (nếu có) -->
+				<c:if test="${not empty message}">
+					<div class="alert alert-info">${message}</div>
+				</c:if>
 
-		<!-- Form thêm/chỉnh sửa người dùng -->
-		<div class="user-form-container">
-		    <form action="users" method="post" class="mb-4">
-		        <!-- Thêm trường ẩn cho action -->
-		        <input type="hidden" name="action" value="">
-		        
-		        <div class="user-form-group">
-		            <label for="Id">ID:</label> 
-		            <input type="text" name="Id" class="user-form-control"}>
-		        </div>
-		
-		        <div class="user-form-group">
-		            <label for="title">Title:</label> 
-		            <input type="text" name="title" class="user-form-control"} required>
-		        </div>
-		        
-		        <div class="user-form-group">
-		            <label for="content">Content:</label> 
-		            <input type="textarea" rows="5" cols="20" name="content" class="user-form-control"} required>
-		        </div>
-		        
-		        <div class="user-form-group">
-		            <label for="postedDate">PostedDate:</label> 
-		            <input type="text" name="postedDate" class="user-form-control"} required>
-		        </div>
-		        
-		        <div class="user-form-group">
-		            <label for="author">Author:</label> 
-		            <input type="text" name="author" class="user-form-control"} required>
-		        </div>
-		        
-		        <div class="user-form-group">
-		            <label for="viewCount">ViewCount:</label> 
-		            <input type="text" name="viewCount" class="user-form-control"} required>
-		        </div>
-		        
-		        <div class="user-form-group">
-		            <label for="categoryId">CategoryId:</label> 
-		            <input type="text" name="categoryId" class="user-form-control"} required>
-		        </div>
-		        
-		        <div class="user-form-group">
-		            <label for="image">Image:</label>
-					<input name="image" type="file"><br>
-		        </div>
-		        
-				<div class="user-form-group">
-		            <label for="home">Home:</label>
-		            <div style="flex: 1;">
-		                <input class="form-check-input" type="radio" name="home" id="true" value=""}>
-		                <input class="form-check-input" type="radio" name="home" id="true" value=""}>
-		            </div>
-		        </div>
-		
-		        <div class="text-center">
-		            <button type="submit" class="user-form-button">Thêm</button>
-		            <button type="submit" class="user-form-button">Xóa</button>
-		            <button type="submit" class="user-form-button">Cập Nhập</button>
-		        </div>
-		    </form>
-		</div>
-<br><br><br>
-		<!-- Form tìm kiếm -->
-					<div class="text-center mb-3"
-						style="margin: 0 auto; margin-bottom: 15px;">
-						<form action="users" method="get" class="form-inline d-inline-block">
-							<input type="hidden" name="action" value="search"> <input
-								type="text" name="searchId" class="form-control"
-								placeholder="Nhập ID người dùng" required>
-							<button type="submit" class="btn btn-secondary ml-2">Tìm</button>
-						</form>
-					</div>
+				<!-- Form thêm/chỉnh sửa người dùng -->
+				<div class="user-form-container">
+					<form action="users" method="post" class="mb-4">
+						<!-- Thêm trường ẩn cho action -->
+						<input type="hidden" name="action" value="">
 
-		<!-- Danh sách người dùng -->
-		<table class="table table-bordered" style="text-align: center;">
-		    <thead>
-		        <tr style="background-color: gray;">
-		            <th>ID</th>
-		            <th>Title</th>
-		            <th>Content</th>
-		            <th>Image</th>
-		            <th>PostedDate</th>
-		            <th>Author</th>
-		            <th>ViewCount</th>
-		            <th>CategoryId</th>
-		            <th>Home</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		     <c:forEach var="user" items="${list}">
-		            <tr onclick="selectUser('${user.id}', '${user.title}', '${user.content}', '${user.image}', '${user.postedDate}', '${user.author}', '${user.viewCount}', '${user.categoryId}','${user.home}')">
-		                <td>${user.id}</td>
-		                <td>${user.title}</td>       
-		                <td>${user.content}</td>
-		                <td>${user.image}</td>
-		                <td>${user.postedDate}</td>
-		                <td>${user.author}</td>
-		                <td>${user.viewCount}</td>
-		                <td>${user.categoryId}</td>
-		                <td>${user.home}</td>
-		            </tr>
-		        </c:forEach>
-		    </tbody>
-		</table>
-        </div>
-        <!-- Sidebar -->
-		<div class="sidebar">
-			<a href="#">Trang chủ</a>  <a
-				href="#">Quản lý Tin Tức</a>  <a
-				href="#">Quản lý Người Dùng</a>  <a
-				href="#">Tin Yêu thích</a>
+						<div class="user-form-group">
+							<label for="Id">ID:</label> <input type="text" name="Id"
+								class="user-form-control"}>
+						</div>
+
+						<div class="user-form-group">
+							<label for="title">Title:</label> <input type="text" name="title"
+								class="user-form-control" } required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="content">Content:</label> <input type="textarea"
+								rows="5" cols="20" name="content" class="user-form-control"
+								} required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="postedDate">PostedDate:</label> <input type="text"
+								name="postedDate" class="user-form-control" } required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="author">Author:</label> <input type="text"
+								name="author" class="user-form-control" } required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="viewCount">ViewCount:</label> <input type="text"
+								name="viewCount" class="user-form-control" } required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="categoryId">CategoryId:</label> <input type="text"
+								name="categoryId" class="user-form-control" } required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="image">Image:</label> <input name="image" type="file"><br>
+						</div>
+
+						<div class="user-form-group">
+							<label for="home">Home:</label>
+							<div style="flex: 1;">
+								<label>Yes</label> <input class="form-check-input" type="radio"
+									name="home" id="true" value="true"> <label>No</label> <input
+									class="form-check-input" type="radio" name="home" id="false"
+									value="false">
+
+							</div>
+						</div>
+
+						<div class="text-center">
+							<button type="submit" class="user-form-button">Thêm</button>
+							<button type="submit" class="user-form-button">Xóa</button>
+							<button type="submit" class="user-form-button">Cập Nhập</button>
+						</div>
+					</form>
+				</div>
+				<br> <br> <br>
+				<!-- Form tìm kiếm -->
+				<div class="text-center mb-3"
+					style="margin: 0 auto; margin-bottom: 15px;">
+					<form action="users" method="get"
+						class="form-inline d-inline-block">
+						<input type="hidden" name="action" value="search"> <input
+							type="text" name="searchId" class="form-control"
+							placeholder="Nhập ID người dùng" required>
+						<button type="submit" class="btn btn-secondary ml-2">Tìm</button>
+					</form>
+				</div>
+
+				<!-- Danh sách người dùng -->
+				<table class="table table-bordered" style="text-align: center;">
+					<thead>
+						<tr style="background-color: gray;">
+							<th>ID</th>
+							<th>Title</th>
+							<th>Content</th>
+							<th>Image</th>
+							<th>PostedDate</th>
+							<th>Author</th>
+							<th>ViewCount</th>
+							<th>CategoryId</th>
+							<th>Home</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="user" items="${list}">
+							<tr
+								onclick="selectUser('${user.id}', '${user.title}', '${user.content}', '${user.image}', '${user.postedDate}', '${user.author}', '${user.viewCount}', '${user.categoryId}','${user.home}')">
+								<td>${user.id}</td>
+								<td>${user.title}</td>
+								<td>${user.content}</td>
+								<td>${user.image}</td>
+								<td>${user.postedDate}</td>
+								<td>${user.author}</td>
+								<td>${user.viewCount}</td>
+								<td>${user.categoryId}</td>
+								<td>${user.home}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<!-- Sidebar -->
+			<div class="sidebar">
+				<a href="#">Trang chủ</a> <a href="#">Quản lý Tin Tức</a> <a
+					href="#">Quản lý Người Dùng</a> <a href="#">Tin Yêu thích</a>
+			</div>
 		</div>
-      </div>
-      <footer>
-        <nav>
-          <a href="#">Email</a>
-          <a href="#">SDT</a>
-          <a href="#">FB</a>
-          <a href="#">Zalo</a>
-          <a href="#">Mes</a>
-        </nav>
-      </footer>
-    </div>
-  </body>
+		<footer>
+			<nav>
+				<a href="#">Email</a> <a href="#">SDT</a> <a href="#">FB</a> <a
+					href="#">Zalo</a> <a href="#">Mes</a>
+			</nav>
+		</footer>
+	</div>
+	<script>
+		function selectUser(id, title, content, postedDate, author, viewCount,
+				categoryId, home) {
+			document.getElementsByName('id')[0].value = id;
+			document.getElementsByName('title')[0].value = title;
+			document.getElementsByName('content')[0].value = content;
+			document.getElementsByName('postedDate')[0].value = postedDate;
+			document.getElementsByName('author')[0].value = author;
+			document.getElementsByName('viewCount')[0].value = viewCount;
+			document.getElementsByName('categoryId')[0].value = categoryId;
+			// Cập nhật giới tính
+			const Yes = document.getElementById('true');
+			const No = document.getElementById('false');
+
+			// Kiểm tra nếu giá trị của 'home' là 'true' hoặc 'false'
+			if (home === 'true') {
+				Yes.checked = true;
+				No.checked = false;
+			} else if (home === 'false') {
+				Yes.checked = false;
+				No.checked = true;
+			}
+
+			
+
+			// Cập nhật vai trò
+
+		}
+	</script>
+</body>
 </html>
