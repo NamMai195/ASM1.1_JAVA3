@@ -1,12 +1,9 @@
 package poly.servlet;
 
 import java.io.IOException;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-
 import org.apache.commons.beanutils.BeanUtils;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,14 +11,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import poly.dao.USERSDao;
 import poly.entity.USERS;
+
 @WebServlet({ "/USERS/QLNguoiDung",
-			"/USERS/edit/*", 
-			"/USERS/create", 
-			"/USERS/update", 
-			"/USERS/delete", 
-			"/USERS/reset"})
+              "/USERS/edit/*", 
+              "/USERS/create", 
+              "/USERS/update", 
+              "/USERS/delete", 
+              "/USERS/reset" })
 public class USERSServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private static final String VIEW_QLND = "/Views/QLNguoiDung.jsp";
 
     @Override
@@ -54,7 +52,7 @@ public class USERSServlet extends HttpServlet {
             } else if (path.contains("delete")) {
                 dao.delete(form.getId());
                 form = new USERS(); // Reset form
-            } else if (req.getParameter("action").equals("search")) {
+            } else if ("search".equals(req.getParameter("action"))) {
                 String searchId = req.getParameter("searchId");
                 form = dao.selectByid(searchId); // Lấy người dùng theo ID
             }

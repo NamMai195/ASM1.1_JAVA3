@@ -236,25 +236,6 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 }
 
 </style>
-<script>
-        // Tự động chuyển đến servlet khi trang được tải
-        window.onload = function() {
-            fetch("${pageContext.request.contextPath}/USERS/QLNguoiDung")
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
-                .then(html => {
-                    document.body.innerHTML = html; // Thay đổi nội dung trang với phản hồi từ servlet
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        };
-    </script>
-    
   <body>
     <div class="container">
       <header>
