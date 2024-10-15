@@ -277,80 +277,78 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 
 		<!-- Form thêm/chỉnh sửa người dùng -->
 		<div class="user-form-container">
-		    <form action="users" method="post" class="mb-4">
-		        <!-- Thêm trường ẩn cho action -->
-		        <input type="hidden" name="action" value="${user != null ? 'update' : 'add'}">
-		        
-		        <div class="user-form-group">
-		            <label for="id">ID:</label> 
-		            <input type="text" name="id" class="user-form-control"
-		                   value="${user != null ? user.id : ''}" ${user != null ? 'readonly' : ''}>
-		        </div>
-		
-		        <div class="user-form-group">
-		            <label for="fullname">FullName:</label> 
-		            <input type="text" name="fullname" class="user-form-control"
-		                   value="${user != null ? user.fullname : ''}" required>
-		        </div>
-		        
-		        <div class="user-form-group">
-		            <label for="birthday">Birthday:</label> 
-		            <input type="text" name="birthday" class="user-form-control"
-		                   value="${user != null ? user.birthday : ''}" required>
-		        </div>
-		        
-				<div class="user-form-group">
-		            <label for="gender">Gender:</label>
-		            <div style="flex: 1;">
-		                <input class="form-check-input" type="radio" name="gender" id="male" value="true"
-					       ${user != null && user.gender ? 'checked' : ''}>
-					<label class="form-check-label" for="male">Male</label> 
-					<input class="form-check-input" type="radio" name="gender" id="female" value="false"
-					       ${user != null && user.gender == false ? 'checked' : ''}>
-					<label class="form-check-label" for="female">Female</label>
-		            </div>
-		        </div>
-		        
-		        <div class="user-form-group">
-		            <label for="mobile">Mobile:</label> 
-		            <input type="text" name="mobile" class="user-form-control"
-		                   value="${user != null ? user.mobile : ''}" required>
-		        </div>
-		        
-		        <div class="user-form-group">
-		            <label for="email">Email:</label> 
-		            <input type="email" name="email" class="user-form-control"
-		                   value="${user != null ? user.email : ''}" required>
-		        </div>
-		
-		        <div class="user-form-group">
-		            <label for="password">Password:</label>
-		            <div style="flex: 1; position: relative;">
-		                <input type="password" id="password" name="password" class="user-form-control"
-		                       value="${user != null ? user.password : ''}" required style="width: calc(100% - 30px);"> 
-		                <span class="toggle-password" onclick="togglePassword()">👁️‍🗨️</span>
-		            </div>
-		        </div>
-		
-		        <div class="user-form-group">
-		            <label for="role">Role:</label>
-					<div style="flex: 1;">
-					    <input class="form-check-input" type="radio" name="role" id="manage" value="Manage"
-					           ${user != null && user.role == true ? 'checked' : ''}>
-					    <label class="form-check-label" for="manage">Manage</label> 
-					    <input class="form-check-input" type="radio" name="role" id="reporter" value="Reporter"
-					           ${user != null && user.role == false ? 'checked' : ''}>
-					    <label class="form-check-label" for="reporter">Reporter</label>
-					</div>
-		        </div>
-		
-		        <div class="text-center">
-		            <button type="submit" name="action" value="add" class="user-form-button">Thêm</button>
-					<button type="submit" name="action" value="delete" class="user-form-button">Xóa</button>
-					<button type="submit" name="action" value="update" class="user-form-button">Cập Nhật</button>
-		        </div>
-		    </form>
+    <form action="${pageContext.request.contextPath}/USERS/QLNguoiDung" method="post" class="mb-4">
+        <div class="user-form-group">
+            <label for="id">ID:</label> 
+            <input type="text" name="id" class="user-form-control"
+                   value="${user != null ? user.id : ''}" required>
+        </div>
+
+        <div class="user-form-group">
+            <label for="fullname">FullName:</label> 
+            <input type="text" name="fullname" class="user-form-control"
+                   value="${user != null ? user.fullname : ''}" required>
+        </div>
+        
+        <div class="user-form-group">
+            <label for="birthday">Birthday:</label> 
+            <input type="date" name="birthday" class="user-form-control"
+                   value="${user != null ? user.birthday : ''}" required>
+        </div>
+        
+        <div class="user-form-group">
+            <label for="gender">Gender:</label>
+            <div style="flex: 1;">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="1"
+                       ${user != null && user.gender ? 'checked' : ''}>
+                <label class="form-check-label" for="male">Male</label> 
+                <input class="form-check-input" type="radio" name="gender" id="female" value="0"
+                       ${user != null && user.gender == false ? 'checked' : ''}>
+                <label class="form-check-label" for="female">Female</label>
+            </div>
+        </div>
+        
+        <div class="user-form-group">
+            <label for="mobile">Mobile:</label> 
+            <input type="text" name="mobile" class="user-form-control"
+                   value="${user != null ? user.mobile : ''}" required>
+        </div>
+        
+        <div class="user-form-group">
+            <label for="email">Email:</label> 
+            <input type="email" name="email" class="user-form-control"
+                   value="${user != null ? user.email : ''}" required>
+        </div>
+
+        <div class="user-form-group">
+            <label for="password">Password:</label>
+            <div style="flex: 1; position: relative;">
+                <input type="password" id="password" name="password" class="user-form-control"
+                       value="${user != null ? user.password : ''}" required style="width: calc(100% - 30px);"> 
+                <span class="toggle-password" onclick="togglePassword()">👁️‍🗨️</span>
+            </div>
+        </div>
+
+        <div class="user-form-group">
+            <label for="role">Role:</label>
+            <div style="flex: 1;">
+                <input class="form-check-input" type="radio" name="role" id="manage" value="1"
+                       ${user != null && user.role ? 'checked' : ''}>
+                <label class="form-check-label" for="manage">Manage</label> 
+                <input class="form-check-input" type="radio" name="role" id="reporter" value="0"
+                       ${user != null && user.role == false ? 'checked' : ''}>
+                <label class="form-check-label" for="reporter">Reporter</label>
+            </div>
+        </div>
+
+        <div class="text-center">
+		    <button type="submit" name="action" value="add" class="user-form-button">Thêm</button>
+		    <button type="submit" name="action" value="delete" class="user-form-button" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">Xóa</button>
+		    <button type="submit" name="action" value="update" class="user-form-button">Cập Nhật</button>
+		    <button type="button" class="user-form-button" onclick="resetForm()">Làm Mới</button>
 		</div>
+    </form>
+</div>
 <br><br><br>
 
 		<!-- Form tìm kiếm -->
@@ -442,6 +440,9 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
                 passwordField.type = 'password'; // Ẩn mật khẩu
                 toggleEye.innerText = '👁️‍🗨️'; // Biểu tượng con mắt đóng
             }
+        }
+        function resetForm() {
+            document.querySelector('.user-form-container form').reset();
         }
     </script>
   </body>
