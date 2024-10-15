@@ -65,6 +65,4 @@ public class QLNEWSServlet extends HttpServlet{
         req.setAttribute("list", list);
         req.getRequestDispatcher(VIEW_QLTT).forward(req, resp);
     }
-   
-
 }
