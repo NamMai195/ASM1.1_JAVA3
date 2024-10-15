@@ -2,6 +2,7 @@ package poly.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -47,7 +48,7 @@ public class QLNEWSServlet extends HttpServlet{
                     req.setAttribute("error", "Invalid news ID.");
                 }
             } else if (path.contains("create")) {
-                dao.insert(form);
+                System.out.println(form);
                 form = new NEWS(); // Reset form
             } else if (path.contains("update")) {
                 dao.update(form);
@@ -59,10 +60,18 @@ public class QLNEWSServlet extends HttpServlet{
             e.printStackTrace();
             req.setAttribute("error", "An error occurred during the operation.");
         }
+     // Trong Servlet
+        
 
         req.setAttribute("user", form);
         List<NEWS> list = dao.selectAll();
-        req.setAttribute("list", list);
+        List<NEWS> listdc=new ArrayList<NEWS>();
+        for (NEWS user : list) {
+            user.setTitle(user.getTitle().replace("\n", "\\n"));
+            user.setContent(user.getContent().replace("\n", "\\n"));
+            listdc.add(user);
+        }
+        req.setAttribute("list", listdc);
         req.getRequestDispatcher(VIEW_QLTT).forward(req, resp);
     }
    

@@ -10,7 +10,7 @@ public class JdbcHelper {
     private static  String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static  String dburl="jdbc:sqlserver://localhost:1433;databaseName=WebTruyenThong;encrypt=true;trustServerCertificate=true;";
     private static String user="sa";
-    private static String pass="vinh512005";
+    private static String pass="Nam@19052005";
 //    nap driver
     static {
         try {
