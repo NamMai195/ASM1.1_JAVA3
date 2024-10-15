@@ -1,17 +1,18 @@
 <%@ page pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang Chủ</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/cssindex.css" />
-  </head>
-  <style>
- .content {
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trang Chủ</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Views/cssindex.css" />
+</head>
+<style>
+.content {
 	flex: 1;
 	background-color: white;
 	padding: 20px;
@@ -174,6 +175,7 @@
 	text-align: center;
 	margin-bottom: 20px;
 }
+
 .text-center {
 	display: flex;
 	justify-content: center; /* Căn giữa */
@@ -228,222 +230,244 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 	cursor: pointer;
 	font-size: 16px; /* Kích thước của biểu tượng con mắt */
 }
+
 .search-container {
-    width: 100%; /* Đặt chiều rộng 100% */
-    display: flex; /* Để căn chỉnh nội dung */
-    justify-content: center; /* Căn giữa nội dung */
-    margin-bottom: 20px; /* Khoảng cách dưới thanh tìm kiếm */
+	width: 100%; /* Đặt chiều rộng 100% */
+	display: flex; /* Để căn chỉnh nội dung */
+	justify-content: center; /* Căn giữa nội dung */
+	margin-bottom: 20px; /* Khoảng cách dưới thanh tìm kiếm */
 }
-
 </style>
-  <body>
-    <div class="container">
-      <header>
-        <img src="${pageContext.request.contextPath}/Views/img/image.png" alt="Bị lỗi" />
-        <div class="text-overlay">
-          <h1>Chân Trời Công Nghệ FPT</h1>
-          <h3>Tin Tức Dẫn Đầu Giới Công Nghệ</h3>
-        </div>
-      </header>
-      <!-- Thanh điều hướng -->
-      <nav>
-        <a href="#">Trang chủ</a>
-        <div class="dropdown">
-          <a href="#">Thể loại</a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Tất Cả</a></li>
-            <li><a href="#">Tin Mới</a></li>
-            <li><a href="#">Giải trí</a></li>
-            <li><a href="#">Công Nghệ Mới</a></li>
-            <li><a href="#">Sản Phẩm Công Nghệ Mới Ra Mắt</a></li>
-          </ul>
-        </div>
-        <a href="#">Yêu thích</a>
-        <a href="#">Đăng nhập</a>
-        <a href="#">Đăng ký</a>
-      </nav>
-      <!-- Hàng chữ chạy -->
-      <marquee behavior="scroll" direction="left" class="scrolling-text">
-        Nhà Cái Đến Từ Châu Âu
-      </marquee>
-      <!-- Nội dung chính -->
-      <div class="main">
-        <div class="content">
-          <h1 class="mt-5">QUẢN LÝ NGƯỜI DÙNG</h1>
-			<!-- Thông báo (nếu có) -->
-			<c:if test="${not empty message}">
-				<div class="alert alert-info">${message}</div>
-			</c:if>
-
-		<!-- Form thêm/chỉnh sửa người dùng -->
-		<div class="user-form-container">
-    <form action="${pageContext.request.contextPath}/USERS/QLNguoiDung" method="post" class="mb-4">
-        <div class="user-form-group">
-            <label for="id">ID:</label> 
-            <input type="text" name="id" class="user-form-control"
-                   value="${user != null ? user.id : ''}" required>
-        </div>
-
-        <div class="user-form-group">
-            <label for="fullname">FullName:</label> 
-            <input type="text" name="fullname" class="user-form-control"
-                   value="${user != null ? user.fullname : ''}" required>
-        </div>
-        
-        <div class="user-form-group">
-            <label for="birthday">Birthday:</label> 
-            <input type="date" name="birthday" class="user-form-control"
-                   value="${user != null ? user.birthday : ''}" required>
-        </div>
-        
-        <div class="user-form-group">
-            <label for="gender">Gender:</label>
-            <div style="flex: 1;">
-                <input class="form-check-input" type="radio" name="gender" id="male" value="1"
-                       ${user != null && user.gender ? 'checked' : ''}>
-                <label class="form-check-label" for="male">Male</label> 
-                <input class="form-check-input" type="radio" name="gender" id="female" value="0"
-                       ${user != null && user.gender == false ? 'checked' : ''}>
-                <label class="form-check-label" for="female">Female</label>
-            </div>
-        </div>
-        
-        <div class="user-form-group">
-            <label for="mobile">Mobile:</label> 
-            <input type="text" name="mobile" class="user-form-control"
-                   value="${user != null ? user.mobile : ''}" required>
-        </div>
-        
-        <div class="user-form-group">
-            <label for="email">Email:</label> 
-            <input type="email" name="email" class="user-form-control"
-                   value="${user != null ? user.email : ''}" required>
-        </div>
-
-        <div class="user-form-group">
-            <label for="password">Password:</label>
-            <div style="flex: 1; position: relative;">
-                <input type="password" id="password" name="password" class="user-form-control"
-                       value="${user != null ? user.password : ''}" required style="width: calc(100% - 30px);"> 
-                <span class="toggle-password" onclick="togglePassword()">👁️‍🗨️</span>
-            </div>
-        </div>
-
-        <div class="user-form-group">
-            <label for="role">Role:</label>
-            <div style="flex: 1;">
-                <input class="form-check-input" type="radio" name="role" id="manage" value="1"
-                       ${user != null && user.role ? 'checked' : ''}>
-                <label class="form-check-label" for="manage">Manage</label> 
-                <input class="form-check-input" type="radio" name="role" id="reporter" value="0"
-                       ${user != null && user.role == false ? 'checked' : ''}>
-                <label class="form-check-label" for="reporter">Reporter</label>
-            </div>
-        </div>
-
-        <div class="text-center">
-		    <button type="submit" name="action" value="add" class="user-form-button">Thêm</button>
-		    <button type="submit" name="action" value="delete" class="user-form-button" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">Xóa</button>
-		    <button type="submit" name="action" value="update" class="user-form-button">Cập Nhật</button>
-		    <button type="button" class="user-form-button" onclick="resetForm()">Làm Mới</button>
-		</div>
-    </form>
-</div>
-<br><br><br>
-
-		<!-- Form tìm kiếm -->
-			<div class="search-container">
-			    <form action="${pageContext.request.contextPath}/USERS/QLNguoiDung" method="get" class="form-inline d-inline-block" style="width: 80%;">
-			        <input type="hidden" name="action" value="search"> 
-			        <input type="text" name="searchId" class="form-control" placeholder="Nhập ID người dùng" required style="width: 100%;">
-			        <button type="submit" class="btn btn-secondary ml-2">Tìm</button>
-			    </form>
+<body>
+	<div class="container">
+		<header>
+			<img src="${pageContext.request.contextPath}/Views/img/image.png"
+				alt="Bị lỗi" />
+			<div class="text-overlay">
+				<h1>Chân Trời Công Nghệ FPT</h1>
+				<h3>Tin Tức Dẫn Đầu Giới Công Nghệ</h3>
 			</div>
+		</header>
+		<!-- Thanh điều hướng -->
+		<nav>
+			<a href="#">Trang chủ</a>
+			<div class="dropdown">
+				<a href="#">Thể loại</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Tất Cả</a></li>
+					<li><a href="#">Tin Mới</a></li>
+					<li><a href="#">Giải trí</a></li>
+					<li><a href="#">Công Nghệ Mới</a></li>
+					<li><a href="#">Sản Phẩm Công Nghệ Mới Ra Mắt</a></li>
+				</ul>
+			</div>
+			<a href="#">Yêu thích</a> <a href="#">Đăng nhập</a> <a href="#">Đăng
+				ký</a>
+		</nav>
+		<!-- Hàng chữ chạy -->
+		<marquee behavior="scroll" direction="left" class="scrolling-text">
+			Nhà Cái Đến Từ Châu Âu </marquee>
+		<!-- Nội dung chính -->
+		<div class="main">
+			<div class="content">
+				<h1 class="mt-5">QUẢN LÝ NGƯỜI DÙNG</h1>
+				<!-- Thông báo (nếu có) -->
+				<c:if test="${not empty message}">
+					<div class="alert alert-info">${message}</div>
+				</c:if>
 
-		<!-- Danh sách người dùng -->
-		<table class="table table-bordered" style="text-align: center;">
-		    <thead>
-		        <tr style="background-color: gray;">
-		            <th>ID</th>
-		            <th>FullName</th>
-		            <th>Birthday</th>
-		            <th>Gender</th>
-		            <th>Mobile</th>
-		            <th>Email</th>
-		            <th>Role</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        <c:forEach var="user" items="${list}">
-		            <tr onclick="selectUser('${user.id}', '${user.fullname}', '${user.birthday}', '${user.gender}', '${user.mobile}', '${user.email}', '${user.password}', '${user.role}')">
-		                <td>${user.id}</td>
-		                <td>${user.fullname}</td>       
-		                <td>${user.birthday}</td>
-		                <td>${user.gender == true ? 'Nam' : 'Nữ'}</td>
-		                <td>${user.mobile}</td>
-		                <td>${user.email}</td>
-		                <td>${user.role == true ? 'Quản Trị' : 'Phóng Viên'}</td>
-		            </tr>
-		        </c:forEach>
-    		</tbody>
-		</table>
-        </div>
-        <!-- Sidebar -->
-		<div class="sidebar">
-			<a href="#">Trang chủ</a>  <a
-				href="#">Quản lý Tin Tức</a>  <a
-				href="#">Quản lý Người Dùng</a>  <a
-				href="#">Tin Yêu thích</a>
+				<!-- Form thêm/chỉnh sửa người dùng -->
+				<div class="user-form-container">
+					<form id="actionForm"
+						method="post" class="mb-4">
+						<div class="user-form-group">
+							<label for="id">ID:</label> <input type="text" name="id"
+								class="user-form-control" value="${user != null ? user.id : ''}"
+								required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="fullname">FullName:</label> <input type="text"
+								name="fullname" class="user-form-control"
+								value="${user != null ? user.fullname : ''}" required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="birthday">Birthday:</label> <input type="date"
+								name="birthday" class="user-form-control"
+								value="${user != null ? user.birthday : ''}" required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="gender">Gender:</label>
+							<div style="flex: 1;">
+								<input class="form-check-input" type="radio" name="gender"
+									id="male" value="1"
+									${user != null && user.gender ? 'checked' : ''}> <label
+									class="form-check-label" for="male">Male</label> <input
+									class="form-check-input" type="radio" name="gender" id="female"
+									value="0"
+									${user != null && user.gender == false ? 'checked' : ''}>
+								<label class="form-check-label" for="female">Female</label>
+							</div>
+						</div>
+
+						<div class="user-form-group">
+							<label for="mobile">Mobile:</label> <input type="text"
+								name="mobile" class="user-form-control"
+								value="${user != null ? user.mobile : ''}" required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="email">Email:</label> <input type="email"
+								name="email" class="user-form-control"
+								value="${user != null ? user.email : ''}" required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="password">Password:</label>
+							<div style="flex: 1; position: relative;">
+								<input type="password" id="password" name="password"
+									class="user-form-control"
+									value="${user != null ? user.password : ''}" required
+									style="width: calc(100% - 30px);"> <span
+									class="toggle-password" onclick="togglePassword()">👁️‍🗨️</span>
+							</div>
+						</div>
+
+						<div class="user-form-group">
+							<label for="role">Role:</label>
+							<div style="flex: 1;">
+								<input class="form-check-input" type="radio" name="role"
+									id="manage" value="1"
+									${user != null && user.role ? 'checked' : ''}> <label
+									class="form-check-label" for="manage">Manage</label> <input
+									class="form-check-input" type="radio" name="role" id="reporter"
+									value="0"
+									${user != null && user.role == false ? 'checked' : ''}>
+								<label class="form-check-label" for="reporter">Reporter</label>
+							</div>
+						</div>
+
+						<div class="text-center">
+							<!-- Nút Thêm -->
+							<button type="button" onclick="submitForm('/USERS/create')"
+								class="user-form-button">Thêm</button>
+
+							<!-- Nút Xóa -->
+							<button type="button" onclick="submitForm('/USERS/delete')"
+								class="user-form-button">Xóa</button>
+
+							<!-- Nút Cập Nhật -->
+							<button type="button" onclick="submitForm('/USERS/update')"
+								class="user-form-button">Cập Nhật</button>
+						</div>
+					</form>
+				</div>
+				<br>
+				<br>
+				<br>
+
+				<!-- Form tìm kiếm -->
+				<div class="search-container">
+					<form action="${pageContext.request.contextPath}/USERS/QLNguoiDung"
+						method="get" class="form-inline d-inline-block"
+						style="width: 80%;">
+						<input type="hidden" name="action" value="search"> <input
+							type="text" name="searchId" class="form-control"
+							placeholder="Nhập ID người dùng" required style="width: 100%;">
+						<button type="submit" class="btn btn-secondary ml-2">Tìm</button>
+					</form>
+				</div>
+
+				<!-- Danh sách người dùng -->
+				<table class="table table-bordered" style="text-align: center;">
+					<thead>
+						<tr style="background-color: gray;">
+							<th>ID</th>
+							<th>FullName</th>
+							<th>Birthday</th>
+							<th>Gender</th>
+							<th>Mobile</th>
+							<th>Email</th>
+							<th>Role</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="user" items="${list}">
+							<tr
+								onclick="selectUser('${user.id}', '${user.fullname}', '${user.birthday}', '${user.gender}', '${user.mobile}', '${user.email}', '${user.password}', '${user.role}')">
+								<td>${user.id}</td>
+								<td>${user.fullname}</td>
+								<td>${user.birthday}</td>
+								<td>${user.gender == true ? 'Nam' : 'Nữ'}</td>
+								<td>${user.mobile}</td>
+								<td>${user.email}</td>
+								<td>${user.role == true ? 'Quản Trị' : 'Phóng Viên'}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<!-- Sidebar -->
+			<div class="sidebar">
+				<a href="#">Trang chủ</a> <a href="#">Quản lý Tin Tức</a> <a
+					href="#">Quản lý Người Dùng</a> <a href="#">Tin Yêu thích</a>
+			</div>
 		</div>
-      </div>
-      <footer>
-        <nav>
-          <a href="#">Email</a>
-          <a href="#">SDT</a>
-          <a href="#">FB</a>
-          <a href="#">Zalo</a>
-          <a href="#">Mes</a>
-        </nav>
-      </footer>
-    </div>
-    <script>
-	    function selectUser(id, fullname, birthday, gender, mobile, email, password, role) {
-	        document.getElementsByName('id')[0].value = id;
-	        document.getElementsByName('fullname')[0].value = fullname;
-	        document.getElementsByName('birthday')[0].value = birthday;
-	        
-	        // Cập nhật giới tính
-	        const MaleRadio = document.getElementById('male');
-	        const FemaleRadio = document.getElementById('female');
-	        MaleRadio.checked = (gender === 'true');
-	        FemaleRadio.checked = (gender === 'false');
-	        
-	        document.getElementsByName('mobile')[0].value = mobile;
-	        document.getElementsByName('email')[0].value = email;
-	        document.getElementsByName('password')[0].value = password;
-	
-	        // Cập nhật vai trò
-	        const ManageRadio = document.getElementById('manage');
-	        const ReporterRadio = document.getElementById('reporter');
-	        ManageRadio.checked = (role === 'true');
-	        ReporterRadio.checked = (role === 'false');
-	    }
+		<footer>
+			<nav>
+				<a href="#">Email</a> <a href="#">SDT</a> <a href="#">FB</a> <a
+					href="#">Zalo</a> <a href="#">Mes</a>
+			</nav>
+		</footer>
+	</div>
+	<script>
+		function selectUser(id, fullname, birthday, gender, mobile, email,
+				password, role) {
+			document.getElementsByName('id')[0].value = id;
+			document.getElementsByName('fullname')[0].value = fullname;
+			document.getElementsByName('birthday')[0].value = birthday;
 
-        function togglePassword() {
-            const passwordField = document.getElementById('password');
-            const toggleEye = document.querySelector('.toggle-password');
+			// Cập nhật giới tính
+			const MaleRadio = document.getElementById('male');
+			const FemaleRadio = document.getElementById('female');
+			MaleRadio.checked = (gender === 'true');
+			FemaleRadio.checked = (gender === 'false');
 
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text'; // Hiển thị mật khẩu
-                toggleEye.innerText = '👁️'; // Biểu tượng con mắt mở
-            } else {
-                passwordField.type = 'password'; // Ẩn mật khẩu
-                toggleEye.innerText = '👁️‍🗨️'; // Biểu tượng con mắt đóng
-            }
-        }
-        function resetForm() {
-            document.querySelector('.user-form-container form').reset();
-        }
-    </script>
-  </body>
+			document.getElementsByName('mobile')[0].value = mobile;
+			document.getElementsByName('email')[0].value = email;
+			document.getElementsByName('password')[0].value = password;
+
+			// Cập nhật vai trò
+			const ManageRadio = document.getElementById('manage');
+			const ReporterRadio = document.getElementById('reporter');
+			ManageRadio.checked = (role === 'true');
+			ReporterRadio.checked = (role === 'false');
+		}
+
+		function togglePassword() {
+			const passwordField = document.getElementById('password');
+			const toggleEye = document.querySelector('.toggle-password');
+
+			if (passwordField.type === 'password') {
+				passwordField.type = 'text'; // Hiển thị mật khẩu
+				toggleEye.innerText = '👁️'; // Biểu tượng con mắt mở
+			} else {
+				passwordField.type = 'password'; // Ẩn mật khẩu
+				toggleEye.innerText = '👁️‍🗨️'; // Biểu tượng con mắt đóng
+			}
+		}
+		function resetForm() {
+			document.querySelector('.user-form-container form').reset();
+		}
+		// Hàm thay đổi action của form và gửi đi
+		function submitForm(actionPath) {
+			var form = document.getElementById("actionForm");
+			// Thêm đường dẫn hành động vào phần sau của URL
+			form.action = '/ASM_Java3/' + actionPath;
+			form.submit();
+		}
+	</script>
+</body>
 </html>

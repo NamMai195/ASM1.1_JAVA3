@@ -293,7 +293,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 						</div>
 
 						<div class="user-form-group">
-							<label for="postedDate">PostedDate:</label> <input type="text"
+							<label for="postedDate">PostedDate:</label> <input type="date"
 								name="postedDate" class="user-form-control"
 								value="${user != null ? user.postedDate : ''}" required>
 						</div>
