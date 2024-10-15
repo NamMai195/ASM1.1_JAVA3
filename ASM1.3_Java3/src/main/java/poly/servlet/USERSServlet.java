@@ -4,14 +4,17 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import poly.dao.USERSDao;
 import poly.entity.USERS;
 
@@ -65,7 +68,20 @@ public class USERSServlet extends HttpServlet {
                 form = new USERS(); // Reset form
                 req.setAttribute("message", "User added successfully.");
             } else if (path.contains("update")) {
-                dao.update(form);
+                // Lấy thông tin từ request
+                String id = req.getParameter("id");
+                String fullname = req.getParameter("fullname");
+                String birthdayStr = req.getParameter("birthday");
+                Date birthday = (Date) ConvertUtils.convert(birthdayStr, Date.class); // Chuyển đổi chuỗi thành Date
+                boolean gender = Boolean.parseBoolean(req.getParameter("gender"));
+                String mobile = req.getParameter("mobile");
+                String email = req.getParameter("email");
+                String password = req.getParameter("password");
+                boolean role = Boolean.parseBoolean(req.getParameter("role"));
+
+                // Cập nhật vào cơ sở dữ liệu
+                USERS user = new USERS(id, password, fullname, birthday, gender, mobile, email, role);
+                dao.update(user); // Gọi phương thức update trong dao
                 req.setAttribute("message", "User updated successfully.");
             } else if (path.contains("delete")) {
                 String id = req.getParameter("id");
@@ -83,7 +99,7 @@ public class USERSServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            req.setAttribute("error", "An error occurred during the operation.");
+            req.setAttribute("error", "An error occurred during the operation: " + e.getMessage());
         }
 
         req.setAttribute("user", form);

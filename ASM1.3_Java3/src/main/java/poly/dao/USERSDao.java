@@ -1,9 +1,10 @@
 package poly.dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.sql.Date;
 import poly.entity.USERS;
 import poly.utils.JdbcHelper;
 
@@ -61,7 +62,7 @@ public class USERSDao extends WebDao<USERS, String> {
                 entity.setRole(rs.getBoolean("Role"));
                 list.add(entity);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException("Database error: " + e.getMessage(), e);
         }
         return list;
