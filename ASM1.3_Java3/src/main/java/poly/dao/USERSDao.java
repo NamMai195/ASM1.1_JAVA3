@@ -14,6 +14,7 @@ public class USERSDao extends WebDao<USERS, String> {
     final String DELETE_SQL = "DELETE FROM USERS WHERE Id=?";
     final String SELECT_ALL_SQL = "SELECT * FROM USERS";
     final String SELECT_BY_ID_SQL = "SELECT * FROM USERS WHERE Id=?";
+    final String CHECK_LOGIN_SQL = "SELECT * FROM USERS WHERE Id = ? AND Password = ?";
 
     @Override
     public void insert(USERS entity) {
@@ -66,5 +67,11 @@ public class USERSDao extends WebDao<USERS, String> {
             throw new RuntimeException("Database error: " + e.getMessage(), e);
         }
         return list;
+    }
+
+    // Phương thức kiểm tra đăng nhập
+    public USERS checkLogin(String username, String password) {
+        List<USERS> list = selectBySql(CHECK_LOGIN_SQL, username, password);
+        return list.isEmpty() ? null : list.get(0);
     }
 }
