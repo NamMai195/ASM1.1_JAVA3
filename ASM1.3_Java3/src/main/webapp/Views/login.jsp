@@ -1,17 +1,18 @@
 <%@ page pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang Chủ</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Views/cssindex.css" />
-  </head>
-  <style>
- .content {
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trang Chủ</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Views/cssindex.css" />
+</head>
+<style>
+.content {
 	flex: 1;
 	background-color: white;
 	padding: 20px;
@@ -174,6 +175,7 @@
 	text-align: center;
 	margin-bottom: 20px;
 }
+
 .text-center {
 	display: flex;
 	justify-content: center; /* Căn giữa */
@@ -228,161 +230,166 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 	cursor: pointer;
 	font-size: 16px; /* Kích thước của biểu tượng con mắt */
 }
+
 .search-container {
-    width: 100%; /* Đặt chiều rộng 100% */
-    display: flex; /* Để căn chỉnh nội dung */
-    justify-content: center; /* Căn giữa nội dung */
-    margin-bottom: 20px; /* Khoảng cách dưới thanh tìm kiếm */
+	width: 100%; /* Đặt chiều rộng 100% */
+	display: flex; /* Để căn chỉnh nội dung */
+	justify-content: center; /* Căn giữa nội dung */
+	margin-bottom: 20px; /* Khoảng cách dưới thanh tìm kiếm */
 }
+
 .login-container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    margin: 50px auto;
-    /* Canh giữa form */
+	background: #fff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 400px;
+	margin: 50px auto;
+	/* Canh giữa form */
 }
+
 .login-header {
-    text-align: center;
-    margin-bottom: 20px;
+	text-align: center;
+	margin-bottom: 20px;
 }
+
 .login-header h1 {
-    margin-bottom: 10px;
-    color: #333;
+	margin-bottom: 10px;
+	color: #333;
 }
+
 .input-group {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
+
 .input-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #555;
-    font-size: 16px;
+	display: block;
+	margin-bottom: 5px;
+	color: #555;
+	font-size: 16px;
 }
-.input-group input[type="text"],
-.input-group input[type="password"],
-.input-group input[type="email"],
-.input-group input[type="tel"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s;
-    font-size: 16px;
+
+.input-group input[type="text"], .input-group input[type="password"],
+	.input-group input[type="email"], .input-group input[type="tel"] {
+	width: calc(100% - 20px);
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	transition: border-color 0.3s;
+	font-size: 16px;
 }
-.input-group input[type="text"]:focus,
-.input-group input[type="password"]:focus,
-.input-group input[type="email"]:focus,
-.input-group input[type="tel"]:focus {
-    border-color: #74ebd5;
-    outline: none;
+
+.input-group input[type="text"]:focus, .input-group input[type="password"]:focus,
+	.input-group input[type="email"]:focus, .input-group input[type="tel"]:focus
+	{
+	border-color: #74ebd5;
+	outline: none;
 }
+
 .login-form>button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background: #d0d0d0;
-    color: black;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	background: #d0d0d0;
+	color: black;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background 0.3s;
 }
+
 .login-form>button:hover {
-    background: #acb6e5;
+	background: #acb6e5;
 }
+
 .footer-links {
-    text-align: center;
-    margin-top: 10px;
+	text-align: center;
+	margin-top: 10px;
 }
+
 .footer-links a {
-    color: blue;
-    text-decoration: none;
-    transition: color 0.3s;
+	color: blue;
+	text-decoration: none;
+	transition: color 0.3s;
 }
+
 .footer-links a:hover {
-    color: red;
+	color: red;
 }
 /* Phần đăng nhập */
 .login-header p {
-    color: #666;
+	color: #666;
 }
+
 .input-group.remember-me {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
+
 .input-group.remember-me input[type="checkbox"] {
-    margin-right: 10px;
+	margin-right: 10px;
 }
 </style>
-  <body>
-    <div class="container">
-      <header>
-        <img src="${pageContext.request.contextPath}/Views/img/image.png" alt="Bị lỗi" />
-        <div class="text-overlay">
-          <h1>Chân Trời Công Nghệ FPT</h1>
-          <h3>Tin Tức Dẫn Đầu Giới Công Nghệ</h3>
-        </div>
-      </header>
-      <!-- Thanh điều hướng -->
-      <nav>
-        <a href="#">Trang chủ</a>
-        <div class="dropdown">
-          <a href="#">Thể loại</a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Tất Cả</a></li>
-            <li><a href="#">Tin Mới</a></li>
-            <li><a href="#">Giải trí</a></li>
-            <li><a href="#">Công Nghệ Mới</a></li>
-            <li><a href="#">Sản Phẩm Công Nghệ Mới Ra Mắt</a></li>
-          </ul>
-        </div>
-        <a href="#">Yêu thích</a>
-        <a href="#">Đăng nhập</a>
-        <a href="#">Đăng ký</a>
-      </nav>
-      <!-- Hàng chữ chạy -->
-      <marquee behavior="scroll" direction="left" class="scrolling-text">
-        Nhà Cái Đến Từ Châu Âu
-      </marquee>
-      <!-- Nội dung chính -->
-      <div class="login-container">
-		    <div class="login-header">
-		        <h1 style="font-size: 40px;">Đăng nhập</h1>
-		    </div>
-		    <form class="login-form" action="${pageContext.request.contextPath}/login" method="post">
-		        <div class="input-group">
-		            <label for="username">Tên Đăng Nhập:</label>
-		            <input type="text" id="loginUsername" name="username" placeholder="Nhập tên đăng nhập" required>
-		        </div>
-		        <div class="input-group">
-		            <label for="password">Mật Khẩu:</label>
-		            <input type="password" id="loginPassword" name="password" placeholder="Nhập mật khẩu" required>
-		        </div>
-		        <div class="input-group remember-me">
-		            <input type="checkbox" id="remember" name="remember">
-		            <label for="remember">Ghi nhớ đăng nhập</label>
-		        </div>
-		        <button type="submit">Đăng Nhập</button>
-		        <div class="footer-links">
-		            <a href="#">Quên mật khẩu?</a>
-		            <span> | </span>
-		            <a href="">Đăng ký</a>
-		        </div>
-		    </form>
+<body>
+	<div class="container">
+		<header>
+			<img src="${pageContext.request.contextPath}/Views/img/image.png"
+				alt="Bị lỗi" />
+			<div class="text-overlay">
+				<h1>Chân Trời Công Nghệ FPT</h1>
+				<h3>Tin Tức Dẫn Đầu Giới Công Nghệ</h3>
+			</div>
+		</header>
+		<!-- Thanh điều hướng -->
+		<nav>
+			<a href="${pageContext.request.contextPath}/NEWS/index">Trang chủ</a>
+
+			<a href="${pageContext.request.contextPath}/Views/register.jsp">Đăng
+				ký</a>
+
+			<!-- Nút quay lại sử dụng JavaScript -->
+			<a onclick="window.history.back()">Quay lại</a>
+
+		</nav>
+		<!-- Hàng chữ chạy -->
+		<marquee behavior="scroll" direction="left" class="scrolling-text">
+			Nhà Cái Đến Từ Châu Âu </marquee>
+		<!-- Nội dung chính -->
+		<div class="login-container">
+			<div class="login-header">
+				<h1 style="font-size: 40px;">Đăng nhập</h1>
+			</div>
+			<form class="login-form"
+				action="${pageContext.request.contextPath}/login" method="post">
+				<div class="input-group">
+					<label for="username">Tên Đăng Nhập:</label> <input type="text"
+						id="loginUsername" name="username"
+						placeholder="Nhập tên đăng nhập" required>
+				</div>
+				<div class="input-group">
+					<label for="password">Mật Khẩu:</label> <input type="password"
+						id="loginPassword" name="password" placeholder="Nhập mật khẩu"
+						required>
+				</div>
+				<div class="input-group remember-me">
+					<input type="checkbox" id="remember" name="remember"> <label
+						for="remember">Ghi nhớ đăng nhập</label>
+				</div>
+				<button type="submit">Đăng Nhập</button>
+				<div class="footer-links">
+					<a href="#">Quên mật khẩu?</a> <span> | </span> <a href="">Đăng
+						ký</a>
+				</div>
+			</form>
 		</div>
 
-      <footer>
-        <nav>
-          <a href="#">Email</a>
-          <a href="#">SDT</a>
-          <a href="#">FB</a>
-          <a href="#">Zalo</a>
-          <a href="#">Mes</a>
-        </nav>
-      </footer>
-    </div>
-  </body>
+		<footer>
+			<nav>
+				<a href="#">Email</a> <a href="#">SDT</a> <a href="#">FB</a> <a
+					href="#">Zalo</a> <a href="#">Mes</a>
+			</nav>
+		</footer>
+	</div>
+</body>
 </html>

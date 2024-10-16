@@ -47,14 +47,34 @@
 				<a href="#">Thể loại</a>
 				<ul class="dropdown-menu">
 					<c:forEach var="loai" items="${listloai}">
-						<li><a href="${pageContext.request.contextPath}/news?categoryId=${loai.id}">${loai.name}</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/news?categoryId=${loai.id}">${loai.name}</a></li>
 					</c:forEach>
 
 
 				</ul>
 			</div>
-			<a href="#">Yêu thích</a> <a href="#">Đăng nhập</a> <a href="#">Đăng
-				ký</a>
+			<c:if test="${empty dangnhap}">
+				<!-- Hiển thị đăng ký và đăng nhập nếu người dùng chưa đăng nhập -->
+				<a href="${pageContext.request.contextPath}/Views/login.jsp">Đăng
+					nhập</a>
+				<a href="${pageContext.request.contextPath}/Views/register.jsp">Đăng
+					ký</a>
+			</c:if>
+
+			<c:if test="${not empty dangnhap}">
+				<!-- Hiển thị tên người dùng khi đã đăng nhập -->
+<a href="${pageContext.request.contextPath}/Views/QLTinTuc.jsp">Quản Lí Tin</a> 
+				<div class="dropdown">
+					<a href="#">chào, ${dangnhap.fullname}</a>
+					<ul class="dropdown-menu">
+						<li><a href="/logout">Đăng xuất</a></li>
+					</ul>
+				</div>
+				
+			</c:if>
+
+
 		</nav>
 		<!-- Hàng chữ chạy -->
 		<marquee behavior="scroll" direction="left" class="scrolling-text">

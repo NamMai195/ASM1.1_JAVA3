@@ -1,13 +1,16 @@
 package poly.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import poly.dao.CATEGORIESDao;
 import poly.dao.NEWSDao;
+import poly.entity.CATEGORIES;
 import poly.entity.NEWS;
 
 @WebServlet("/news/detail")
@@ -30,6 +33,9 @@ public class NewsDetailServlet extends HttpServlet {
                 request.setAttribute("article", article);
 
                 // Chuyển đến trang chi tiết bài báo
+                CATEGORIESDao loaidao=new CATEGORIESDao();
+                List<CATEGORIES> listloai = loaidao.selectAll();
+                request.setAttribute("listloai", listloai);
                 request.getRequestDispatcher("/Views/news-detail.jsp").forward(request, response);
             } catch (NumberFormatException e) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID không hợp lệ");

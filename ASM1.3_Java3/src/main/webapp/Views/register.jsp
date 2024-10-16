@@ -247,20 +247,9 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
       </header>
       <!-- Thanh điều hướng -->
       <nav>
-        <a href="#">Trang chủ</a>
-        <div class="dropdown">
-          <a href="#">Thể loại</a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Tất Cả</a></li>
-            <li><a href="#">Tin Mới</a></li>
-            <li><a href="#">Giải trí</a></li>
-            <li><a href="#">Công Nghệ Mới</a></li>
-            <li><a href="#">Sản Phẩm Công Nghệ Mới Ra Mắt</a></li>
-          </ul>
-        </div>
-        <a href="#">Yêu thích</a>
-        <a href="#">Đăng nhập</a>
-        <a href="#">Đăng ký</a>
+        <a href="${pageContext.request.contextPath}/NEWS/index">Trang chủ</a>
+       <a href="${pageContext.request.contextPath}/Views/login.jsp">Đăng nhập</a> 
+        <a onclick="window.history.back()">Quay lại</a>
       </nav>
       <!-- Hàng chữ chạy -->
       <marquee behavior="scroll" direction="left" class="scrolling-text">

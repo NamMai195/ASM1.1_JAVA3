@@ -9,6 +9,24 @@
 <title>Trang Chủ</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Views/cssindex.css" />
+<script>
+        // Tự động chuyển đến servlet khi trang được tải
+        window.onload = function() {
+            fetch("${pageContext.request.contextPath}/QLNEWS/index")
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(html => {
+                    document.body.innerHTML = html; // Thay đổi nội dung trang với phản hồi từ servlet
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        };
+    </script>
 </head>
 <style>
 .content {
@@ -242,7 +260,26 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		</header>
 		<!-- Thanh điều hướng -->
 		<nav>
-			<a href="#">Trang chủ</a><a href="#">Đăng Xuất</a>
+			<a href="${pageContext.request.contextPath}/NEWS/index">Trang chủ</a>
+			<c:if test="${empty dangnhap}">
+				<!-- Hiển thị đăng ký và đăng nhập nếu người dùng chưa đăng nhập -->
+				<a href="${pageContext.request.contextPath}/Views/login.jsp">Đăng
+					nhập</a>
+				<a href="${pageContext.request.contextPath}/Views/register.jsp">Đăng
+					ký</a>
+			</c:if>
+
+			<c:if test="${not empty dangnhap}">
+				<!-- Hiển thị tên người dùng khi đã đăng nhập -->
+
+				<div class="dropdown">
+					<a href="#">chào, ${dangnhap.fullname}</a>
+					<ul class="dropdown-menu">
+						<li><a href="/logout">Đăng xuất</a></li>
+					</ul>
+				</div>
+				
+			</c:if>
 		</nav>
 		<!-- Hàng chữ chạy -->
 		<marquee behavior="scroll" direction="left" class="scrolling-text">Nhà
@@ -351,9 +388,10 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 							<!-- Nút Cập Nhật -->
 							<button type="button" onclick="submitForm('/QLNEWS/update')"
 								class="user-form-button">Cập Nhật</button>
-								
-								<!-- Nút Làm mới -->
-							<button type="button" onclick="resetForm()" class="user-form-button">Làm mới</button> 
+
+							<!-- Nút Làm mới -->
+							<button type="button" onclick="resetForm()"
+								class="user-form-button">Làm mới</button>
 						</div>
 					</form>
 				</div>
@@ -399,7 +437,8 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 			<!-- Sidebar -->
 			<div class="sidebar">
 				<a href="#">Trang chủ</a> <a href="#">Quản lý Tin Tức</a> <a
-					href="#">Quản lý Người Dùng</a> <a href="#">Tin Yêu thích(coming soon)</a>
+					href="#">Quản lý Người Dùng</a> <a href="#">Tin Yêu
+					thích(coming soon)</a>
 			</div>
 		</div>
 		<footer>
@@ -434,11 +473,27 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		}
 		// Hàm thay đổi action của form và gửi đi
 		function submitForm(actionPath) {
-			var form = document.getElementById("actionForm");
-			// Thêm đường dẫn hành động vào phần sau của URL
-			form.action = '/ASM_Java3/' + actionPath;
-			form.submit();
-		}
+    var form = document.getElementById("actionForm");
+    
+    // Kiểm tra nếu các trường bắt buộc không trống
+    var title = document.getElementsByName("title")[0].value;
+    var content = document.getElementsByName("content")[0].value;
+    var author = document.getElementsByName("author")[0].value;
+    var viewCount = document.getElementsByName("viewCount")[0].value;
+    var categoryId = document.getElementsByName("categoryId")[0].value;
+
+    // Nếu có bất kỳ trường nào trống, hiển thị thông báo lỗi và không gửi form
+    if (!title || !content || !author || !viewCount || !categoryId) {
+        alert("Vui lòng điền đầy đủ thông tin!");
+        return; // Ngừng hành động gửi form nếu có trường trống
+    }
+
+    // Nếu không có trường nào trống, tiếp tục gửi form
+    form.action = '/ASM_Java3/' + actionPath;
+	form.submit();
+}
+
+	
 		function resetForm() {
 		    document.getElementById("actionForm").reset(); // Reset tất cả các trường trong form
 		}

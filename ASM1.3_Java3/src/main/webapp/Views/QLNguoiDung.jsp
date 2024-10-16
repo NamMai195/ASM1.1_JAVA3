@@ -250,19 +250,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		</header>
 		<!-- Thanh điều hướng -->
 		<nav>
-			<a href="#">Trang chủ</a>
-			<div class="dropdown">
-				<a href="#">Thể loại</a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Tất Cả</a></li>
-					<li><a href="#">Tin Mới</a></li>
-					<li><a href="#">Giải trí</a></li>
-					<li><a href="#">Công Nghệ Mới</a></li>
-					<li><a href="#">Sản Phẩm Công Nghệ Mới Ra Mắt</a></li>
-				</ul>
-			</div>
-			<a href="#">Yêu thích</a> <a href="#">Đăng nhập</a> <a href="#">Đăng
-				ký</a>
+			<a href="${pageContext.request.contextPath}/NEWS/index">Trang chủ</a> <a href="#">Đăng Xuất</a>
 		</nav>
 		<!-- Hàng chữ chạy -->
 		<marquee behavior="scroll" direction="left" class="scrolling-text">
@@ -278,8 +266,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 
 				<!-- Form thêm/chỉnh sửa người dùng -->
 				<div class="user-form-container">
-					<form id="actionForm"
-						method="post" class="mb-4">
+					<form id="actionForm" method="post" class="mb-4">
 						<div class="user-form-group">
 							<label for="id">ID:</label> <input type="text" name="id"
 								class="user-form-control" value="${user != null ? user.id : ''}"
@@ -361,15 +348,14 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 							<!-- Nút Cập Nhật -->
 							<button type="button" onclick="submitForm('/USERS/update')"
 								class="user-form-button">Cập Nhật</button>
-								
+
 							<!-- Nút Làm mới -->
-							<button type="button" onclick="resetForm()" class="user-form-button">Làm mới</button> 
+							<button type="button" onclick="resetForm()"
+								class="user-form-button">Làm mới</button>
 						</div>
 					</form>
 				</div>
-				<br>
-				<br>
-				<br>
+				<br> <br> <br>
 
 				<!-- Form tìm kiếm -->
 				<div class="search-container">
@@ -462,7 +448,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 			}
 		}
 		function resetForm() {
-		    document.getElementById("actionForm").reset(); // Reset tất cả các trường trong form
+			document.getElementById("actionForm").reset(); // Reset tất cả các trường trong form
 		}
 		// Hàm thay đổi action của form và gửi đi
 		function submitForm(actionPath) {
