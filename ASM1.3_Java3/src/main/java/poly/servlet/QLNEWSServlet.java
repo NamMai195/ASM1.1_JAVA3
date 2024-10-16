@@ -17,114 +17,121 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import poly.dao.NEWSDao;
 import poly.entity.NEWS;
-import poly.entity.USERS;
 
+import jakarta.servlet.annotation.MultipartConfig;
+
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10MB
+		maxFileSize = 1024 * 1024 * 50, // 50MB
+		maxRequestSize = 1024 * 1024 * 100) // 100MB
 @WebServlet({ "/QLNEWS/index", "/QLNEWS/edit/*", "/QLNEWS/create", "/QLNEWS/update", "/QLNEWS/delete",
 		"/QLNEWS/reset" })
 public class QLNEWSServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW_QLTT = "/Views/QLTinTuc.jsp";
+	private static final String UPLOAD_DIRECTORY = "/img_asm"; // Thêm khai báo biến UPLOAD_DIRECTORY
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		NEWS form = new NEWS();
 		NEWSDao dao = new NEWSDao();
+
+		// Đăng ký DateConverter như trước
 		DateConverter dateConverter = new DateConverter();
 		dateConverter.setPattern("yyyy-MM-dd");
 		ConvertUtils.register(dateConverter, Date.class);
-		System.out.println("Date converter registered.");
-		// Populate the NEWS object with form data
+
 		try {
 			BeanUtils.populate(form, req.getParameterMap());
 
-			// Chuyển đổi ngày tháng thủ công sau khi populate
-			String postedDateStr = req.getParameter("postedDate"); // Lấy tham số ngày tháng từ request
-			if (postedDateStr != null && !postedDateStr.isEmpty()) {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Định dạng ngày tháng
-				try {
-					Date postedDate = sdf.parse(postedDateStr); // Chuyển chuỗi thành Date
-					form.setPostedDate(postedDate); // Gán vào đối tượng NEWS
-				} catch (Exception e) {
-					e.printStackTrace();
-					req.setAttribute("error", "Invalid date format.");
+			// Xử lý phần upload file
+			Part filePart = req.getPart("urlimage"); // Lấy file ảnh từ form
+			if (filePart != null && filePart.getSize() > 0) {
+				String fileName = getSubmittedFileName(filePart); // Lấy tên file
+				String uploadPath = getServletContext().getRealPath(UPLOAD_DIRECTORY);
+
+				// Tạo thư mục nếu chưa tồn tại
+				java.io.File uploadDir = new java.io.File(uploadPath);
+				if (!uploadDir.exists()) {
+					uploadDir.mkdir();
 				}
-			}
 
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-			req.setAttribute("error", "Unable to populate form data.");
-		}
+				// Lưu file vào thư mục
+				filePart.write(uploadPath + java.io.File.separator + fileName);
 
-		String path = req.getServletPath();
-		try {
-			if (path.contains("edit")) {
-				String id = req.getPathInfo() != null ? req.getPathInfo().substring(1) : null;
-				if (id != null) {
-					form = dao.selectByid(id);
-					if (form == null) {
-						req.setAttribute("error", "User not found.");
+				// Lưu tên file vào database (thuộc tính image của đối tượng NEWS)
+				form.setImage(fileName);
+			} else {
+				// Nếu không upload file, kiểm tra xem đang trong hành động cập nhật
+				if (req.getServletPath().contains("update")) {
+					// Giữ nguyên giá trị image hiện tại (không cập nhật nếu không có file mới)
+					NEWS currentNews = dao.selectByid(form.getId());
+					if (currentNews != null) {
+						form.setImage(currentNews.getImage());
 					}
 				} else {
-					req.setAttribute("error", "Invalid user ID.");
+					// Nếu không có file và không phải hành động update, đặt image là null
+					form.setImage(null);
 				}
-			} else if (path.contains("create")) {
-				dao.insert(form);
-				form = new NEWS(); // Reset form
-				req.setAttribute("message", "User added successfully.");
-			} else if (path.contains("update")) {
-				// Lấy dữ liệu từ request
-				String id = req.getParameter("id");
-				String title = req.getParameter("title");
-				String content = req.getParameter("content");
-				String image = req.getParameter("image");
-
-				// Chuyển đổi chuỗi thành Date cho trường PostedDate
-				Date postedDate = (Date) ConvertUtils.convert(req.getParameter("postedDate"), Date.class);
-
-				String author = req.getParameter("author");
-
-				// Chuyển đổi chuỗi thành số nguyên cho ViewCount
-				int viewCount = Integer.parseInt(req.getParameter("viewCount"));
-
-				String categoryId = req.getParameter("categoryId");
-
-				// Chuyển đổi chuỗi thành boolean cho Home
-				boolean home = Boolean.parseBoolean(req.getParameter("home"));
-
-				// Cập nhật vào cơ sở dữ liệu
-				NEWS NEW = new NEWS(id, title, content, image, postedDate, author, viewCount, categoryId, home);
-				dao.update(NEW); // Gọi phương thức update trong dao
-
-			} else if (path.contains("delete")) {
-				String id = req.getParameter("id");
-				if (id != null) {
-					dao.delete(id);
-
-				} else {
-					req.setAttribute("error", "Invalid user ID.");
-				}
-				form = new NEWS(); // Reset form
-			} else if ("search".equals(req.getParameter("action"))) {
-				String searchId = req.getParameter("searchId");
-				form = dao.selectByid(searchId);
 			}
+
+			// Xử lý các chức năng khác như create, update...
+			String path = req.getServletPath();
+			if (path.contains("create")) {
+			    dao.insert(form);
+			    req.setAttribute("message", "News added successfully.");
+			} else if (path.contains("update")) {
+			    dao.update(form);
+			    req.setAttribute("message", "News updated successfully.");
+			} else if (path.contains("delete")) {
+			    String id = req.getParameter("id");
+			    if (id != null && !id.trim().isEmpty()) {
+			        dao.delete(id); // Gọi phương thức delete trong DAO
+			        req.setAttribute("message", "News deleted successfully.");
+			    } else {
+			        req.setAttribute("error", "ID of news is missing.");
+			    } 
+			} else if ("search".equals(req.getParameter("action"))) {
+			    String searchId = req.getParameter("searchId");
+			    if (searchId != null && !searchId.trim().isEmpty()) {
+			        form = dao.selectByid(searchId);
+			        if (form != null) {
+			            req.setAttribute("news", form); // Đảm bảo bạn gửi dữ liệu tìm kiếm nếu tìm thấy
+			        } else {
+			            req.setAttribute("error", "News not found.");
+			        }
+			    } else {
+			        req.setAttribute("error", "Search ID is missing.");
+			    }
+			} else {
+			    req.setAttribute("error", "Invalid action.");
+			}
+
+
+			// Các logic xử lý khác
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("error", "An error occurred during the operation.");
 		}
 
-		// Truyền dữ liệu đến view
-		req.setAttribute("user", form);
+		// Hiển thị danh sách tin tức
+		req.setAttribute("news", form);
 		List<NEWS> list = dao.selectAll();
-		List<NEWS> listdc = new ArrayList<>();
-		for (NEWS user : list) {
-			user.setTitle(user.getTitle().replace("\n", "\\n"));
-			user.setContent(user.getContent().replace("\n", "\\n"));
-			listdc.add(user);
-		}
-		req.setAttribute("list", listdc);
+		req.setAttribute("list", list);
 		req.getRequestDispatcher(VIEW_QLTT).forward(req, resp);
 	}
+
+	private String getSubmittedFileName(Part part) {
+		String header = part.getHeader("content-disposition");
+		String[] elements = header.split(";");
+		for (String element : elements) {
+			if (element.trim().startsWith("filename")) {
+				return element.substring(element.indexOf('=') + 1).trim().replace("\"", "");
+			}
+		}
+		return null;
+	}
+
 }

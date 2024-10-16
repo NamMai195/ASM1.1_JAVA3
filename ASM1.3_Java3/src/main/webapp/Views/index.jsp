@@ -65,18 +65,20 @@
             <div class="content">
                 <h2>Bài Báo Mới Nhất</h2>
                 <c:forEach var="tin" items="${list}" varStatus="status">
-                    <div class="news-article">
-                        <img src="./img/image.png" alt="Bài báo" />
-                        <h3>${status.index + 1}</h3> <!-- Hiển thị số thứ tự -->
-                        <div>
-                            <p>${tin.title}</p>
-                            <br />
-                            <p>${tin.postedDate} - ${tin.author}</p>
-                        </div>
-                        <a class="favorite-button">Yêu thích</a>
-                        
-                    </div>
-                </c:forEach>
+    <div class="news-article">
+        <img src="${pageContext.request.contextPath}/img_asm/${tin.image}" alt="Bài báo" />
+        <h3>${status.index + 1}</h3> <!-- Hiển thị số thứ tự -->
+        <div>
+            <h1>
+                <a href="${pageContext.request.contextPath}/news/detail?id=${tin.id}">${tin.title}</a>
+            </h1>
+            <br />
+            <p>${tin.postedDate} - ${tin.author}</p>
+        </div>
+        <a class="favorite-button">Yêu thích</a>
+    </div>
+</c:forEach>
+
             </div>
             <!-- Phần bên phải -->
             <div class="sidebar-right">

@@ -270,7 +270,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 
 				<!-- Form thêm/chỉnh sửa người dùng -->
 				<div class="user-form-container">
-					<form form id="actionForm" method="post" class="mb-4">
+					<form  id="actionForm" method="post" class="mb-4" enctype="multipart/form-data">
 						<input type="hidden" name="action"
 							value="${user != null ? 'update' : 'add'}">
 
@@ -358,17 +358,8 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 					</form>
 				</div>
 				<br> <br> <br>
-				<!-- Form tìm kiếm -->
-				<div class="search-container">
-					<form action="${pageContext.request.contextPath}//QLNEWS/index"
-						method="get" class="form-inline d-inline-block"
-						style="width: 80%;">
-						<input type="hidden" name="action" value="search"> <input
-							type="text" name="searchId" class="form-control"
-							placeholder="Nhập ID người dùng" required style="width: 100%;">
-						<button type="submit" class="btn btn-secondary ml-2">Tìm</button>
-					</form>
-				</div>
+				
+				
 
 				<!-- Danh sách người dùng -->
 				<table class="table table-bordered" style="text-align: center;">
