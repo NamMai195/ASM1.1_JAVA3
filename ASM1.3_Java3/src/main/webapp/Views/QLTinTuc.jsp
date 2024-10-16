@@ -359,13 +359,13 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 				</div>
 				<br> <br> <br>
 				<!-- Form tìm kiếm -->
-				<div class="text-center mb-3"
-					style="margin: 0 auto; margin-bottom: 15px;">
-					<form action="users" method="get"
-						class="form-inline d-inline-block">
+				<div class="search-container">
+					<form action="${pageContext.request.contextPath}//QLNEWS/index"
+						method="get" class="form-inline d-inline-block"
+						style="width: 80%;">
 						<input type="hidden" name="action" value="search"> <input
 							type="text" name="searchId" class="form-control"
-							placeholder="Nhập ID người dùng" required>
+							placeholder="Nhập ID người dùng" required style="width: 100%;">
 						<button type="submit" class="btn btn-secondary ml-2">Tìm</button>
 					</form>
 				</div>
@@ -390,7 +390,10 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 								onclick="selectUser('${user.id}', '${user.title}', '${user.content}', '${user.image}', '${user.postedDate}', '${user.author}', '${user.viewCount}', '${user.categoryId}', '${user.home}')">
 								<td>${user.id}</td>
 								<td>${user.title}</td>
-								<td>${user.image}</td>
+								<td><img
+									src="${pageContext.request.contextPath}/img_asm/${user.image}"
+									alt="User Image" style="width: 50px"></td>
+
 								<td>${user.postedDate}</td>
 								<td>${user.author}</td>
 								<td>${user.viewCount}</td>
