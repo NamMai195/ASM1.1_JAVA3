@@ -276,59 +276,82 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 			</c:if>
 
 		<!-- Form thêm/chỉnh sửa người dùng -->
-		<div class="user-form-container">
-    <form action="${pageContext.request.contextPath}/USERS/QLNguoiDung" method="post" class="mb-4">
-    
-        <div class="user-form-group">
-            <label for="fullname">FullName:</label> 
-            <input type="text" name="fullname" class="user-form-control"
-                   value="${user != null ? user.fullname : ''}" required>
-        </div>
-        
-        <div class="user-form-group">
-            <label for="birthday">Birthday:</label> 
-            <input type="date" name="birthday" class="user-form-control"
-                   value="${user != null ? user.birthday : ''}" required>
-        </div>
-        
-        <div class="user-form-group">
-            <label for="gender">Gender:</label>
-            <div style="flex: 1;">
-                <input class="form-check-input" type="radio" name="gender" id="male" value="1"
-                       ${user != null && user.gender ? 'checked' : ''}>
-                <label class="form-check-label" for="male">Male</label> 
-                <input class="form-check-input" type="radio" name="gender" id="female" value="0"
-                       ${user != null && user.gender == false ? 'checked' : ''}>
-                <label class="form-check-label" for="female">Female</label>
-            </div>
-        </div>
-        
-        <div class="user-form-group">
-            <label for="mobile">Mobile:</label> 
-            <input type="text" name="mobile" class="user-form-control"
-                   value="${user != null ? user.mobile : ''}" required>
-        </div>
-        
-        <div class="user-form-group">
-            <label for="email">Email:</label> 
-            <input type="email" name="email" class="user-form-control"
-                   value="${user != null ? user.email : ''}" required>
-        </div>
+				<div class="user-form-container">
+					<form id="actionForm"
+						method="post" class="mb-4">
+						<div class="user-form-group">
+							<label for="id">Login Name:</label> <input type="text" name="id"
+								class="user-form-control" value="${user != null ? user.id : ''}"
+								required>
+						</div>
 
-        <div class="user-form-group">
-            <label for="password">Password:</label>
-            <div style="flex: 1; position: relative;">
-                <input type="password" id="password" name="password" class="user-form-control"
-                       value="${user != null ? user.password : ''}" required style="width: calc(100% - 30px);"> 
-                <span class="toggle-password" onclick="togglePassword()">👁️‍🗨️</span>
-            </div>
-        </div>
+						<div class="user-form-group">
+							<label for="fullname">FullName:</label> <input type="text"
+								name="fullname" class="user-form-control"
+								value="${user != null ? user.fullname : ''}" required>
+						</div>
 
-        <div class="text-center">
-		    <button type="submit" name="action" value="add" class="user-form-button">Đăng Ký</button>
-		</div>
-    </form>
-</div>
+						<div class="user-form-group">
+							<label for="birthday">Birthday:</label> <input type="date"
+								name="birthday" class="user-form-control"
+								value="${user != null ? user.birthday : ''}" required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="gender">Gender:</label>
+							<div style="flex: 1;">
+								<input class="form-check-input" type="radio" name="gender"
+									id="male" value="1"
+									${user != null && user.gender ? 'checked' : ''}> <label
+									class="form-check-label" for="male">Male</label> <input
+									class="form-check-input" type="radio" name="gender" id="female"
+									value="0"
+									${user != null && user.gender == false ? 'checked' : ''}>
+								<label class="form-check-label" for="female">Female</label>
+							</div>
+						</div>
+
+						<div class="user-form-group">
+							<label for="mobile">Mobile:</label> <input type="text"
+								name="mobile" class="user-form-control"
+								value="${user != null ? user.mobile : ''}" required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="email">Email:</label> <input type="email"
+								name="email" class="user-form-control"
+								value="${user != null ? user.email : ''}" required>
+						</div>
+
+						<div class="user-form-group">
+							<label for="password">Password:</label>
+							<div style="flex: 1; position: relative;">
+								<input type="password" id="password" name="password"
+									class="user-form-control"
+									value="${user != null ? user.password : ''}" required
+									style="width: calc(100% - 30px);"> <span
+									class="toggle-password" onclick="togglePassword()">👁️‍🗨️</span>
+							</div>
+						</div>
+
+						<div class="user-form-group">
+							<label for="role">Role:</label>
+							<div style="flex: 1;">
+								 <input
+									class="form-check-input" type="radio" name="role" id="reporter"
+									value="0"
+									${user != null && user.role == false ? 'checked' : ''}>
+								<label class="form-check-label" for="reporter">Reporter</label>
+							</div>
+						</div>
+
+						<div class="text-center">
+							<!-- Nút Thêm -->
+							<button type="button" onclick="submitForm('/USERS/dangky')"
+								class="user-form-button">Đăng ký </button>
+						</div>
+					</form>
+				</div>
         </div>
       </div>
       <footer>
@@ -354,9 +377,13 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
                 toggleEye.innerText = '👁️‍🗨️'; // Biểu tượng con mắt đóng
             }
         }
-        function resetForm() {
-            document.querySelector('.user-form-container form').reset();
-        }
+     // Hàm thay đổi action của form và gửi đi
+		function submitForm(actionPath) {
+			var form = document.getElementById("actionForm");
+			// Thêm đường dẫn hành động vào phần sau của URL
+			form.action = '/ASM_Java3/' + actionPath;
+			form.submit();
+		}
     </script>
   </body>
 </html>

@@ -361,6 +361,9 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 							<!-- Nút Cập Nhật -->
 							<button type="button" onclick="submitForm('/USERS/update')"
 								class="user-form-button">Cập Nhật</button>
+								
+							<!-- Nút Làm mới -->
+							<button type="button" onclick="resetForm()" class="user-form-button">Làm mới</button> 
 						</div>
 					</form>
 				</div>
@@ -459,7 +462,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 			}
 		}
 		function resetForm() {
-			document.querySelector('.user-form-container form').reset();
+		    document.getElementById("actionForm").reset(); // Reset tất cả các trường trong form
 		}
 		// Hàm thay đổi action của form và gửi đi
 		function submitForm(actionPath) {

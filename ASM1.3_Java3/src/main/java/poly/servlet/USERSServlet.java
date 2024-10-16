@@ -22,11 +22,12 @@ import poly.entity.USERS;
               "/USERS/edit/*", 
               "/USERS/create", 
               "/USERS/update", 
-              "/USERS/delete", 
-              "/USERS/reset" })
+              "/USERS/delete",
+              "/USERS/dangky" })
 public class USERSServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String VIEW_QLND = "/Views/QLNguoiDung.jsp";
+    private static final String VIEW_INDEX = "/Views/index.jsp";
 
     @Override
     public void init() throws ServletException {
@@ -65,10 +66,8 @@ public class USERSServlet extends HttpServlet {
                 }
             } else if (path.contains("create")) {
                 dao.insert(form);
-                form = new USERS(); // Reset form
                 req.setAttribute("message", "User added successfully.");
             } else if (path.contains("update")) {
-                // Lấy thông tin từ request
                 String id = req.getParameter("id");
                 String fullname = req.getParameter("fullname");
                 String birthdayStr = req.getParameter("birthday");
@@ -81,7 +80,7 @@ public class USERSServlet extends HttpServlet {
 
                 // Cập nhật vào cơ sở dữ liệu
                 USERS user = new USERS(id, password, fullname, birthday, gender, mobile, email, role);
-                dao.update(user); // Gọi phương thức update trong dao
+                dao.update(user);
                 req.setAttribute("message", "User updated successfully.");
             } else if (path.contains("delete")) {
                 String id = req.getParameter("id");
@@ -91,7 +90,9 @@ public class USERSServlet extends HttpServlet {
                 } else {
                     req.setAttribute("error", "Invalid user ID.");
                 }
-                form = new USERS(); // Reset form
+            }else if (path.contains("dangky")) {
+                dao.insert(form);
+                req.getRequestDispatcher(VIEW_INDEX).forward(req, resp);
             } else if ("search".equals(req.getParameter("action"))) {
                 String searchId = req.getParameter("searchId");
                 form = dao.selectByid(searchId);
@@ -102,9 +103,15 @@ public class USERSServlet extends HttpServlet {
             req.setAttribute("error", "An error occurred during the operation: " + e.getMessage());
         }
 
+        // Reset form sau khi thêm, xóa hoặc cập nhật
+        if (path.contains("create") || path.contains("delete") || path.contains("update")) {
+            form = new USERS(); // Reset form
+        }
+
         req.setAttribute("user", form);
         List<USERS> list = dao.selectAll();
         req.setAttribute("list", list);
         req.getRequestDispatcher(VIEW_QLND).forward(req, resp);
     }
+
 }

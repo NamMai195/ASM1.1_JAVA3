@@ -60,7 +60,7 @@ public class USERSDao extends WebDao<USERS, String> {
                 entity.setGender(rs.getBoolean("Gender"));
                 entity.setMobile(rs.getString("Mobile"));
                 entity.setEmail(rs.getString("Email"));
-                entity.setRole(rs.getBoolean("Role"));
+                entity.setRole(rs.getBoolean("Role")); // Assuming Role is a boolean where true means admin
                 list.add(entity);
             }
         } catch (SQLException e) {

@@ -3,90 +3,95 @@ package poly.entity;
 import java.util.Date;
 
 public class USERS {
-	private String Id;
-	private String Password;
-	private String Fullname;
-	private Date Birthday;
-	private Boolean Gender;
-	private String Mobile;
-	private String Email;
-	private Boolean Role;
-	
-	public USERS() {
-	}
+    private String Id;
+    private String Password;
+    private String Fullname;
+    private Date Birthday;
+    private Boolean Gender;
+    private String Mobile;
+    private String Email;
+    private Boolean Role;
 
-	public USERS(String id, String password, String fullname, Date birthday, Boolean gender, String mobile, String email,Boolean role) {
-		Id = id;
-		Password = password;
-		Fullname = fullname;
-		Birthday = birthday;
-		Gender = gender;
-		Mobile = mobile;
-		Email = email;
-		Role = role;
-	}
+    public USERS() {
+    }
 
-	public String getId() {
-		return Id;
-	}
+    public USERS(String id, String password, String fullname, Date birthday, Boolean gender, String mobile, String email, Boolean role) {
+        Id = id;
+        Password = password;
+        Fullname = fullname;
+        Birthday = birthday;
+        Gender = gender;
+        Mobile = mobile;
+        Email = email;
+        Role = role;
+    }
 
-	public void setId(String id) {
-		Id = id;
-	}
+    public String getId() {
+        return Id;
+    }
 
-	public String getPassword() {
-		return Password;
-	}
+    public void setId(String id) {
+        Id = id;
+    }
 
-	public void setPassword(String password) {
-		Password = password;
-	}
+    public String getPassword() {
+        return Password;
+    }
 
-	public String getFullname() {
-		return Fullname;
-	}
+    public void setPassword(String password) {
+        Password = password;
+    }
 
-	public void setFullname(String fullname) {
-		Fullname = fullname;
-	}
+    public String getFullname() {
+        return Fullname;
+    }
 
-	public Date getBirthday() {
-		return Birthday;
-	}
+    public void setFullname(String fullname) {
+        Fullname = fullname;
+    }
 
-	public void setBirthday(Date birthday) {
-		Birthday = birthday;
-	}
+    public Date getBirthday() {
+        return Birthday;
+    }
 
-	public Boolean getGender() {
-		return Gender;
-	}
+    public void setBirthday(Date birthday) {
+        Birthday = birthday;
+    }
 
-	public void setGender(Boolean gender) {
-		Gender = gender;
-	}
+    public Boolean getGender() {
+        return Gender;
+    }
 
-	public String getMobile() {
-		return Mobile;
-	}
+    public void setGender(Boolean gender) {
+        Gender = gender;
+    }
 
-	public void setMobile(String mobile) {
-		Mobile = mobile;
-	}
+    public String getMobile() {
+        return Mobile;
+    }
 
-	public String getEmail() {
-		return Email;
-	}
+    public void setMobile(String mobile) {
+        Mobile = mobile;
+    }
 
-	public void setEmail(String email) {
-		Email = email;
-	}
+    public String getEmail() {
+        return Email;
+    }
 
-	public Boolean getRole() {
-		return Role;
-	}
+    public void setEmail(String email) {
+        Email = email;
+    }
 
-	public void setRole(Boolean role) {
-		Role = role;
-	}
+    public Boolean getRole() {
+        return Role;
+    }
+
+    public void setRole(Boolean role) {
+        Role = role;
+    }
+
+    // Phương thức kiểm tra quyền quản trị
+    public boolean isRole() {
+        return Role != null && Role; // Trả về true nếu Role là true, ngược lại trả về false
+    }
 }

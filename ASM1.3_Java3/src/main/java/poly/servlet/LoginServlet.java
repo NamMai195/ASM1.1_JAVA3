@@ -1,7 +1,6 @@
 package poly.servlet;
 
 import java.io.IOException;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,7 +23,13 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             // Đăng nhập thành công
             request.getSession().setAttribute("user", user); // Lưu thông tin người dùng vào session
-            response.sendRedirect(request.getContextPath() + "/NEWS/index"); // Chuyển hướng đến trang chủ
+            
+            // Kiểm tra quyền quản trị
+            if (user.isRole()) { // Giả sử 'isRole' trả về true nếu người dùng là quản trị viên
+                response.sendRedirect(request.getContextPath() + "/USERS/QLNguoiDung"); // Chuyển hướng đến trang quản lý người dùng
+            } else {
+                response.sendRedirect(request.getContextPath() + "/NEWS/index"); // Chuyển hướng đến trang đăng tin
+            }
         } else {
             // Đăng nhập thất bại
             request.setAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng.");
@@ -32,4 +37,3 @@ public class LoginServlet extends HttpServlet {
         }
     }
 }
-
