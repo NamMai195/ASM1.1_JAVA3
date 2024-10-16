@@ -40,7 +40,6 @@
         </header>
         <!-- Thanh điều hướng -->
         <nav>
-        <a>sdada</a>
             <a href="#">Trang chủ</a>
             <div class="dropdown">
                 <a href="#">Thể loại</a>
