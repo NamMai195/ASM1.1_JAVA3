@@ -11,7 +11,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import poly.entity.CATEGORIES;
 import poly.entity.NEWS;
+import poly.dao.CATEGORIESDao;
 import poly.dao.NEWSDao;
 
 @WebServlet( "/NEWS/index")
@@ -36,6 +38,10 @@ public class NEWSServlet extends HttpServlet {
         req.setAttribute("item", form);
         List<NEWS> list = dao.selectAll();
         req.setAttribute("list", list);
+        req.setAttribute("loai", form);
+        CATEGORIESDao loaidao=new CATEGORIESDao();
+        List<CATEGORIES> listloai = loaidao.selectAll();
+        req.setAttribute("listloai", listloai);
         req.getRequestDispatcher(VIEW_INDEX).forward(req, resp);
     }
 }

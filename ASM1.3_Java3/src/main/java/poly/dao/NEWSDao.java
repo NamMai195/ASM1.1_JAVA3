@@ -13,6 +13,8 @@ public class NEWSDao extends WebDao<NEWS, String> {
 	final String DELETE_SQL = "DELETE FROM NEWS WHERE Id=?";
 	final String SELECT_ALL_SQL = "SELECT * FROM NEWS";
 	final String SELECT_BY_ID_SQL = "SELECT * FROM NEWS WHERE Id=?";
+	final String SELECT_BY_CATEGORY_SQL = "SELECT * FROM NEWS WHERE CategoryId = ?"; // SQL để lấy bài viết theo
+																						// categoryId
 
 	@Override
 	public void insert(NEWS entity) {
@@ -72,5 +74,10 @@ public class NEWSDao extends WebDao<NEWS, String> {
 			throw new RuntimeException(e);
 		}
 		return list;
+	}
+
+	// Phương thức mới để lấy bài viết theo CategoryId
+	public List<NEWS> getNewsByCategory(String categoryId) {
+		return selectBySql(SELECT_BY_CATEGORY_SQL, categoryId);
 	}
 }

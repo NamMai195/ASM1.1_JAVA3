@@ -10,24 +10,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Views/cssindex.css" />
 
-<script>
-        // Tự động chuyển đến servlet khi trang được tải
-        window.onload = function() {
-            fetch("${pageContext.request.contextPath}/NEWS/index")
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
-                .then(html => {
-                    document.body.innerHTML = html; // Thay đổi nội dung trang với phản hồi từ servlet
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        };
-    </script>
 
 </head>
 <body>
@@ -47,7 +29,7 @@
 				<a href="#">Thể loại</a>
 				<ul class="dropdown-menu">
 					<c:forEach var="loai" items="${listloai}">
-						<li><a href="${pageContext.request.contextPath}/news?categoryId=${loai.id}">${loai.name}</a></li>
+						<li><a href="news?categoryId=${loai.id}">${loai.name}</a></li>
 					</c:forEach>
 
 
@@ -62,8 +44,9 @@
 		<!-- Nội dung chính -->
 		<div class="main">
 			<div class="content">
-				<h2>Bài Báo Mới Nhất</h2>
-				<c:forEach var="tin" items="${list}" varStatus="status">
+				<h2>${thongbao}</h2>
+
+				<c:forEach var="tin" items="${filteredNews}" varStatus="status">
 					<div class="news-article">
 						<img src="${pageContext.request.contextPath}/img_asm/${tin.image}"
 							alt="Bài báo" />
@@ -77,7 +60,7 @@
 							<br />
 							<p>${tin.postedDate}-${tin.author}</p>
 						</div>
-						<a class="favorite-button">Yêu thích</a>
+
 					</div>
 				</c:forEach>
 

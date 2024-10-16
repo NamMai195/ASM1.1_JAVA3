@@ -18,7 +18,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import poly.dao.CATEGORIESDao;
 import poly.dao.NEWSDao;
+import poly.entity.CATEGORIES;
 import poly.entity.NEWS;
 
 import jakarta.servlet.annotation.MultipartConfig;
@@ -115,7 +117,9 @@ public class QLNEWSServlet extends HttpServlet {
 			e.printStackTrace();
 			req.setAttribute("error", "An error occurred during the operation.");
 		}
-
+		CATEGORIESDao loaitin=new CATEGORIESDao();
+		List<CATEGORIES> categories = loaitin.selectAll();
+		req.setAttribute("categories", categories);
 		// Hiển thị danh sách tin tức
 		req.setAttribute("news", form);
 		List<NEWS> list = dao.selectAll();

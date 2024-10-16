@@ -7,7 +7,7 @@ import java.util.List;
 import poly.entity.CATEGORIES;
 import poly.utils.JdbcHelper;
 
-public class CATEGORIESDao extends WebDao<CATEGORIES, Integer> {
+public class CATEGORIESDao extends WebDao<CATEGORIES, String> {
 	final String INSERT_SQL = "INSERT INTO CATEGORIES(Id, Name) VALUES(?,?)";
 	final String UPDATE_SQL = "UPDATE CATEGORIES SET Name=? WHERE Id=?";
 	final String DELETE_SQL = "DELETE FROM CATEGORIES WHERE Id=?";
@@ -27,7 +27,7 @@ public class CATEGORIESDao extends WebDao<CATEGORIES, Integer> {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         JdbcHelper.update(DELETE_SQL,id);
     }
 
@@ -37,7 +37,7 @@ public class CATEGORIESDao extends WebDao<CATEGORIES, Integer> {
     }
 
     @Override
-    public CATEGORIES selectByid(Integer id) {
+    public CATEGORIES selectByid(String id) {
     List<CATEGORIES> list= selectBySql(SELECT_BY_ID_SQL,id);
         if(list.isEmpty()){
             return null;

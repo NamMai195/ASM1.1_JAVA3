@@ -242,19 +242,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		</header>
 		<!-- Thanh điều hướng -->
 		<nav>
-			<a href="#">Trang chủ</a>
-			<div class="dropdown">
-				<a href="#">Thể loại</a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Tất Cả</a></li>
-					<li><a href="#">Tin Mới</a></li>
-					<li><a href="#">Giải trí</a></li>
-					<li><a href="#">Công Nghệ Mới</a></li>
-					<li><a href="#">Sản Phẩm Công Nghệ Mới Ra Mắt</a></li>
-				</ul>
-			</div>
-			<a href="#">Yêu thích</a> <a href="#">Đăng nhập</a> <a href="#">Đăng
-				ký</a>
+			<a href="#">Trang chủ</a><a href="#">Đăng Xuất</a>
 		</nav>
 		<!-- Hàng chữ chạy -->
 		<marquee behavior="scroll" direction="left" class="scrolling-text">Nhà
@@ -270,7 +258,8 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 
 				<!-- Form thêm/chỉnh sửa người dùng -->
 				<div class="user-form-container">
-					<form  id="actionForm" method="post" class="mb-4" enctype="multipart/form-data">
+					<form id="actionForm" method="post" class="mb-4"
+						enctype="multipart/form-data">
 						<input type="hidden" name="action"
 							value="${user != null ? 'update' : 'add'}">
 
@@ -311,10 +300,18 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 						</div>
 
 						<div class="user-form-group">
-							<label for="categoryId">CategoryId:</label> <input type="text"
-								name="categoryId" class="user-form-control"
-								value="${user != null ? user.categoryId : ''}" required>
+							<label for="categoryId">Category:</label> <select
+								name="categoryId" class="user-form-control" required>
+								<option value="">Chọn thể loại</option>
+								<!-- Thêm một option mặc định -->
+								<c:forEach var="category" items="${categories}">
+									<option value="${category.id}"
+										${user != null && user.categoryId == category.id ? 'selected' : ''}>
+										${category.name}</option>
+								</c:forEach>
+							</select>
 						</div>
+
 
 						<div class="user-form-group"
 							style="display: flex; align-items: center;">
@@ -354,12 +351,15 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 							<!-- Nút Cập Nhật -->
 							<button type="button" onclick="submitForm('/QLNEWS/update')"
 								class="user-form-button">Cập Nhật</button>
+								
+								<!-- Nút Làm mới -->
+							<button type="button" onclick="resetForm()" class="user-form-button">Làm mới</button> 
 						</div>
 					</form>
 				</div>
 				<br> <br> <br>
-				
-				
+
+
 
 				<!-- Danh sách người dùng -->
 				<table class="table table-bordered" style="text-align: center;">
@@ -399,7 +399,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 			<!-- Sidebar -->
 			<div class="sidebar">
 				<a href="#">Trang chủ</a> <a href="#">Quản lý Tin Tức</a> <a
-					href="#">Quản lý Người Dùng</a> <a href="#">Tin Yêu thích</a>
+					href="#">Quản lý Người Dùng</a> <a href="#">Tin Yêu thích(coming soon)</a>
 			</div>
 		</div>
 		<footer>
@@ -438,6 +438,9 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 			// Thêm đường dẫn hành động vào phần sau của URL
 			form.action = '/ASM_Java3/' + actionPath;
 			form.submit();
+		}
+		function resetForm() {
+		    document.getElementById("actionForm").reset(); // Reset tất cả các trường trong form
 		}
 	</script>
 </body>
