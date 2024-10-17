@@ -378,7 +378,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 				</div>
 				<button type="submit">Đăng Nhập</button>
 				<div class="footer-links">
-					<a href="#">Quên mật khẩu?</a> <span> | </span> <a href="">Đăng
+					<a href="#">Quên mật khẩu?</a> <span> | </span> <a href="${pageContext.request.contextPath}/Views/register.jsp">Đăng
 						ký</a>
 				</div>
 			</form>

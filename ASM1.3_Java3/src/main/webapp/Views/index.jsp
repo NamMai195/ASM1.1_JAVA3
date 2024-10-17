@@ -132,8 +132,21 @@
 				</ul>
 
 				<h3>Newsletter</h3>
-				<input type="email" placeholder="Nhập email của bạn" />
-				<button>Đăng ký</button>
+				<form action="${pageContext.request.contextPath}/subscribe" method="post">
+				    <input type="email" name="email" placeholder="Nhập email của bạn" required />
+				    <button type="submit">Đăng ký</button>
+				</form>
+				
+				<% 
+				    String message = (String) request.getAttribute("message");
+				    if (message != null) {
+				%>
+				    <script>
+				        alert("<%= message %>"); // Hiển thị thông báo
+				    </script>
+				<%
+				    }
+				%>
 			</div>
 		</div>
 		<footer>
