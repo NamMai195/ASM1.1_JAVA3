@@ -28,6 +28,7 @@ public class USERSServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String VIEW_QLND = "/Views/QLNguoiDung.jsp";
     private static final String VIEW_INDEX = "/Views/index.jsp";
+    private static final String VIEW_DN = "/Views/login.jsp";
 
     @Override
     public void init() throws ServletException {
@@ -92,7 +93,7 @@ public class USERSServlet extends HttpServlet {
                 }
             }else if (path.contains("dangky")) {
                 dao.insert(form);
-                req.getRequestDispatcher(VIEW_INDEX).forward(req, resp);
+                req.getRequestDispatcher(VIEW_DN).forward(req, resp);
             } else if ("search".equals(req.getParameter("action"))) {
                 String searchId = req.getParameter("searchId");
                 form = dao.selectByid(searchId);

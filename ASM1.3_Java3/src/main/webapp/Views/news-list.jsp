@@ -152,11 +152,10 @@
 				<a href="${pageContext.request.contextPath}/Views/register.jsp">Đăng
 					ký</a>
 			</c:if>
-			<a href="${pageContext.request.contextPath}/Views/QLTinTuc.jsp">Quản
-				Lí Tin</a>
 			<c:if test="${not empty dangnhap}">
 				<!-- Hiển thị tên người dùng khi đã đăng nhập -->
-
+			<a href="${pageContext.request.contextPath}/Views/QLTinTuc.jsp">Quản
+							Lí Tin</a>
 				<div class="dropdown">
 					<a href="#">chào, ${dangnhap.fullname}</a>
 					<ul class="dropdown-menu">
