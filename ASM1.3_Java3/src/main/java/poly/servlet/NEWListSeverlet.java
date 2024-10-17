@@ -32,6 +32,7 @@ System.out.println(filteredNews);
         if(filteredNews.size()<1) {
         	request.setAttribute("thongbao","CHƯA CÓ BÀI BÁO NÀO VỀ "+loaidao.selectByid(categoryId).getName());
         }
+        
         request.setAttribute("listloai", listloai);
         request.getRequestDispatcher("Views/news-list.jsp").forward(request, response);
     }

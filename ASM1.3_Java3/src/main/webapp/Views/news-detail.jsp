@@ -10,7 +10,115 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Views/cssindex.css" />
 
+<style type="text/css">
+.sidebar-right {
+	background-color: #f4f4f4;
+	padding: 20px;
+	border-radius: 8px;
+	margin-top: 20px;
+}
 
+/* Tạo kiểu cho các danh sách trong sidebar */
+.sidebar-right h3 {
+	font-size: 1.5em;
+	color: #333;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+/* Định dạng các danh sách */
+.sidebar-right ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.sidebar-right ul li {
+	margin: 8px 0;
+	padding: 5px;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.sidebar-right ul li a {
+	color: black;
+	font-size: 1.2em;
+	text-decoration: none;
+}
+
+.sidebar-right ul li a:hover {
+	color: #007bff; /* Màu hover khi di chuột vào */
+	text-decoration: underline;
+}
+
+/* Tạo một kiểu giống như thanh điều hướng cho dropdown */
+.sidebar-right .dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.sidebar-right .dropdown-menu {
+	display: none;
+	position: absolute;
+	background-color: #fff;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.sidebar-right .dropdown:hover .dropdown-menu {
+	display: block;
+}
+
+/* Button đăng ký Newsletter */
+.sidebar-right button {
+	padding: 10px;
+	font-size: 1.1em;
+	color: white;
+	background-color: #007bff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100%;
+}
+
+.sidebar-right button:hover {
+	background-color: #0056b3;
+}
+
+.sidebar-right input[type="email"] {
+	padding: 10px;
+	font-size: 1.1em;
+	width: calc(100% - 22px);
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+/* Tạo kiểu cho các liên kết trong danh sách */
+.sidebar-right ul li a {
+	color: black; /* Màu chữ đen */
+	font-size: 1.5em; /* Làm chữ lớn hơn */
+	text-decoration: none; /* Loại bỏ gạch chân */
+}
+
+/* Tạo hiệu ứng hover cho các liên kết trong danh sách */
+.sidebar-right ul li a:hover {
+	color: #007bff; /* Màu chữ khi hover */
+	text-decoration: none; /* Đảm bảo không có gạch chân khi hover */
+}
+/* Tạo kiểu cho các liên kết trong danh sách */
+.sidebar-right ul li a {
+	color: black; /* Màu chữ đen */
+	font-size: 1.5em; /* Làm chữ lớn hơn */
+	text-decoration: none; /* Loại bỏ gạch chân */
+	text-transform: uppercase; /* Chữ in hoa */
+}
+
+/* Tạo hiệu ứng hover cho các liên kết trong danh sách */
+.sidebar-right ul li a:hover {
+	color: #007bff; /* Màu chữ khi hover */
+	text-decoration: none; /* Đảm bảo không có gạch chân khi hover */
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -51,7 +159,7 @@
 				<div class="dropdown">
 					<a href="#">chào, ${dangnhap.fullname}</a>
 					<ul class="dropdown-menu">
-						<li><a href="/logout">Đăng xuất</a></li>
+						<li> <a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
 					</ul>
 				</div>
 
@@ -78,38 +186,26 @@
 					<!-- Giả sử bạn có trường content trong article -->
 				</div>
 				<!-- Nút quay lại sử dụng JavaScript -->
-				<a onclick="window.history.back()">Quay lại</a>
+				<a href="javascript:void(0)"
+					onclick="window.location.href = document.referrer;">Quay lại</a>
+
 
 
 			</div>
 			<!-- Phần bên phải -->
 			<div class="sidebar-right">
-				<h3>5 bài báo hot nhất</h3>
+				
+				<h3>5 bài báo cùng loại</h3>
 				<ul>
-					<li>Bài báo 1</li>
-					<li>Bài báo 2</li>
-					<li>Bài báo 3</li>
-					<li>Bài báo 4</li>
-					<li>Bài báo 5</li>
+					<c:forEach var="sameArticle" items="${sameCategoryArticles}">
+						<li><a
+							href="${pageContext.request.contextPath}/news/detail?id=${sameArticle.id}">
+								${sameArticle.title} </a></li>
+					</c:forEach>
 				</ul>
 
-				<h3>5 bài báo vừa đọc</h3>
-				<ul>
-					<li>Bài báo 1</li>
-					<li>Bài báo 2</li>
-					<li>Bài báo 3</li>
-					<li>Bài báo 4</li>
-					<li>Bài báo 5</li>
-				</ul>
 
-				<h3>5 bài báo được xem nhiều nhất</h3>
-				<ul>
-					<li>Bài báo 1</li>
-					<li>Bài báo 2</li>
-					<li>Bài báo 3</li>
-					<li>Bài báo 4</li>
-					<li>Bài báo 5</li>
-				</ul>
+
 
 				<h3>Newsletter</h3>
 				<input type="email" placeholder="Nhập email của bạn" />

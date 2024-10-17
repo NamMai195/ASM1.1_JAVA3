@@ -80,7 +80,7 @@ public class USERSServlet extends HttpServlet {
 
                 // Cập nhật vào cơ sở dữ liệu
                 USERS user = new USERS(id, password, fullname, birthday, gender, mobile, email, role);
-                dao.update(user);
+                dao.update(form);
                 req.setAttribute("message", "User updated successfully.");
             } else if (path.contains("delete")) {
                 String id = req.getParameter("id");

@@ -275,7 +275,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 				<div class="dropdown">
 					<a href="#">chào, ${dangnhap.fullname}</a>
 					<ul class="dropdown-menu">
-						<li><a href="/logout">Đăng xuất</a></li>
+						<li> <a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
 					</ul>
 				</div>
 				

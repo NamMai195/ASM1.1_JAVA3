@@ -250,7 +250,27 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 		</header>
 		<!-- Thanh điều hướng -->
 		<nav>
-			<a href="${pageContext.request.contextPath}/NEWS/index">Trang chủ</a> <a href="#">Đăng Xuất</a>
+			<a href="${pageContext.request.contextPath}/NEWS/index">Trang chủ</a>
+			<c:if test="${empty dangnhap}">
+				<!-- Hiển thị đăng ký và đăng nhập nếu người dùng chưa đăng nhập -->
+				<a href="${pageContext.request.contextPath}/Views/login.jsp">Đăng
+					nhập</a>
+				<a href="${pageContext.request.contextPath}/Views/register.jsp">Đăng
+					ký</a>
+			</c:if>
+
+			<c:if test="${not empty dangnhap}">
+				<!-- Hiển thị tên người dùng khi đã đăng nhập -->
+
+				<div class="dropdown">
+					<a href="#">chào, ${dangnhap.fullname}</a>
+					<ul class="dropdown-menu">
+						<li><a href="${pageContext.request.contextPath}/logout">Đăng
+								Xuất</a></li>
+					</ul>
+				</div>
+
+			</c:if>
 		</nav>
 		<!-- Hàng chữ chạy -->
 		<marquee behavior="scroll" direction="left" class="scrolling-text">
